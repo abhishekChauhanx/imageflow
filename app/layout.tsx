@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import SessionProvider from "@/components/SessionProvider";
+import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -20,6 +21,22 @@ export default async function RootLayout({
     <html lang="en">
       <body>
         <SessionProvider session={session}>
+          <Toaster
+            position="top-center"
+            toastOptions={{
+              success: {
+                style: {
+                  background: "#18181b",
+                  color: "#fff",
+                  border: "1px solid #27272a",
+                },
+                iconTheme: {
+                  primary: "#22c55e",
+                  secondary: "#fff",
+                },
+              },
+            }}
+          />
           {children}
         </SessionProvider>
       </body>
