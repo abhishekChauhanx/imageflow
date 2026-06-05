@@ -1,0 +1,26 @@
+.blur-text {
+  display: inline;
+}
+
+.blur-word {
+  display: inline-block;
+  opacity: 0;
+  filter: blur(14px);
+  transform: translateY(6px);
+  animation: blurWordIn 0.65s ease forwards;
+  margin-right: 0.28em;
+  white-space: pre;
+}
+
+@keyframes blurWordIn {
+  0% {
+    opacity: 0;
+    filter: blur(14px);
+    transform: translateY(6px);
+  }
+  100% {
+    opacity: 1;
+    filter: blur(0px);
+    transform: translateY(0);
+  }
+}

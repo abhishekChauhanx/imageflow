@@ -1,0 +1,35 @@
+/* wrapper — keeps layout identical to before */
+.true-focus-wrap {
+  display: inline-block;
+  position: relative;
+}
+
+/* the animated box — fixed so it follows the viewport */
+.true-focus-box {
+  position: absolute;
+  pointer-events: none;
+  z-index: 9999;
+  border: 1.5px solid var(--accent);
+  animation: tfExpand 0.55s cubic-bezier(0.22, 0.68, 0, 1.2) forwards;
+}
+
+@keyframes tfExpand {
+  0%   { opacity: 0; transform: scale(0.8);  }
+  45%  { opacity: 1; transform: scale(1.06); }
+  75%  { transform: scale(0.97); }
+  100% { opacity: 0; transform: scale(1);    }
+}
+
+/* corner accents */
+.tfc {
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-color: var(--accent);
+  border-style: solid;
+}
+
+.tfc-tl { top: -2px;    left: -2px;  border-width: 2px 0 0 2px; }
+.tfc-tr { top: -2px;    right: -2px; border-width: 2px 2px 0 0; }
+.tfc-bl { bottom: -2px; left: -2px;  border-width: 0 0 2px 2px; }
+.tfc-br { bottom: -2px; right: -2px; border-width: 0 2px 2px 0; }
