@@ -1,34 +1,39 @@
 "use client";
 
-import {
-  useRef,
-  useState,
-  useEffect,
-  cloneElement,
-  Children,
-  ReactElement,
-} from "react";
+import { useRef, useState, useEffect, ReactElement } from "react";
 import "./TrueFocus.css";
 
 interface TrueFocusProps {
-  children: ReactElement; // single child: <a>, <button>, or <Link>
+  children: ReactElement;
 }
 
 export default function TrueFocus({ children }: TrueFocusProps) {
   const wrapRef = useRef<HTMLSpanElement>(null);
   const [rect, setRect] = useState<DOMRect | null>(null);
   const [visible, setVisible] = useState(false);
-  const timerRef = useRef<ReturnType<typeof setTimeout>>();
+
+  const timerRef = useRef<ReturnType<typeof window.setTimeout> | null>(null);
 
   const show = () => {
     if (!wrapRef.current) return;
+
     setRect(wrapRef.current.getBoundingClientRect());
     setVisible(true);
-    clearTimeout(timerRef.current);
-    timerRef.current = setTimeout(() => setVisible(false), 700);
+
+    if (timerRef.current) {
+      clearTimeout(timerRef.current);
+    }
+
+   timerRef.current = setTimeout(() => {
+  console.log("Hello");
+}, 1000);
   };
 
-  useEffect(() => () => clearTimeout(timerRef.current), []);
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current);
+    };
+  }, []);
 
   const pad = 5;
 
@@ -53,7 +58,6 @@ export default function TrueFocus({ children }: TrueFocusProps) {
             height: rect.height + pad * 2,
           }}
         >
-          {/* four corners */}
           <span className="tfc tfc-tl" />
           <span className="tfc tfc-tr" />
           <span className="tfc tfc-bl" />

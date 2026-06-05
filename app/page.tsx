@@ -90,7 +90,7 @@ export default function Home() {
           <div className="search-visual">
             <div className="search-card">
               <p className="search-label">Your description</p>
-              <p className="search-query">"old lighthouse at dusk, orange sky"</p>
+              <p className="search-query">old lighthouse at dusk, orange sky</p>
 
               <div className="result-items">
                 {[
