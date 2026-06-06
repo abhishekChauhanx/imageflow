@@ -10,7 +10,7 @@ import { scrapeAlphaCoders } from "./alphacoders";
 import { closeBrowser } from "../browser";
 
 export async function searchAllSources(query: string): Promise<ImageResult[]> {
-  console.log(`🔍 Searching all sources for: ${query}`);
+  console.log(` Searching all sources for: ${query}`);
 
   try {
     const results = await Promise.allSettled([
@@ -33,14 +33,14 @@ export async function searchAllSources(query: string): Promise<ImageResult[]> {
 
     results.forEach((result, index) => {
       if (result.status === "fulfilled") {
-        console.log(`✅ ${sources[index]}: ${result.value.length} images`);
+        console.log(` ${sources[index]}: ${result.value.length} images`);
         allImages.push(...result.value);
       } else {
-        console.log(`❌ ${sources[index]}: failed`);
+        console.log(` ${sources[index]}: failed`);
       }
     });
 
-    console.log(`📦 Total images found: ${allImages.length}`);
+    console.log(` Total images found: ${allImages.length}`);
     return allImages;
 
   } finally {
