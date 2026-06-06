@@ -7,11 +7,17 @@ import TrueFocus from "@/components/TrueFocus/TrueFocus";
 import ScrollReveal from "@/components/ScrollReveal/ScrollReveal";
 import CountUp from "@/components/CountUp/CountUp";
 import Footer from "@/components/Footer/Footer";
+import { useAppDispatch, useAppSelector } from "@/store/hooks";
+import { toggleTheme } from "@/store/themeSlice";
 import "./HomePage.css";
 
 export default function Home() {
+  const dispatch = useAppDispatch();
+  const mode = useAppSelector((state) => state.theme.mode);
+  const dark = mode === "dark";
+
   return (
-    <div className="page">
+    <div className={`page${dark ? " page--dark" : ""}`}>
 
       {/* ── NAV ─────────────────────────────── */}
       <nav>
@@ -20,6 +26,15 @@ export default function Home() {
           <li><TrueFocus><a href="#how"><BlurText text="How it works" delay={200} stepDelay={45} /></a></TrueFocus></li>
           <li><TrueFocus><a href="#pricing"><BlurText text="Pricing" delay={380} stepDelay={45} /></a></TrueFocus></li>
           <li><TrueFocus><a href="/login"><BlurText text="Sign in" delay={530} stepDelay={45} /></a></TrueFocus></li>
+          <li>
+            <button
+              className="theme-toggle"
+              onClick={() => dispatch(toggleTheme())}
+              aria-label="Toggle theme"
+            >
+              {dark ? "☀ Light" : "◐ Dark"}
+            </button>
+          </li>
         </ul>
       </nav>
 
@@ -221,8 +236,8 @@ export default function Home() {
             },
             {
               name: "Enterprise",
-              price: null,
-              unit: "custom",
+              price: 99,
+              unit: "+ custom /mo",
               features: ["Unlimited queries", "Dedicated infra", "SLA guarantee", "Custom sources", "SSO / SAML"],
               cta: "Contact us",
               accent: false,

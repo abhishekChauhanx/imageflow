@@ -201,3 +201,92 @@ nav {
   .stat             { flex:1 1 45%; }
   nav               { padding:1.5rem; }
 }
+
+
+/* ─────────────────────────────────────────────────
+   THEME TOGGLE BUTTON
+   ───────────────────────────────────────────────── */
+.theme-toggle {
+  background: none;
+  border: 1px solid rgba(10, 10, 10, 0.18);
+  color: var(--muted);
+  padding: 0.45rem 0.9rem;
+  cursor: pointer;
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-family: 'DM Mono', monospace;
+  transition: color 0.2s, border-color 0.2s;
+}
+.theme-toggle:hover {
+  color: var(--ink);
+  border-color: var(--accent);
+}
+
+/* ─────────────────────────────────────────────────
+   DARK MODE — scoped to .page--dark
+   All other pages are unaffected.
+   ───────────────────────────────────────────────── */
+.page--dark {
+  --cream:   #0D0B08;
+  --ink:     #F5F0E8;
+  --surface: #14120E;
+  --muted:   #8A8070;
+  /* --accent stays #C8A96E */
+}
+
+/* Nav backdrop */
+.page--dark nav {
+  background: rgba(13, 11, 8, 0.88);
+  border-bottom-color: rgba(200, 169, 110, 0.12);
+}
+
+/* Theme toggle inside dark mode */
+.page--dark .theme-toggle {
+  border-color: rgba(200, 169, 110, 0.2);
+}
+.page--dark .theme-toggle:hover {
+  color: var(--ink);
+  border-color: var(--accent);
+}
+
+/* Borders that use literal rgba ink */
+.page--dark .hero-left       { border-right-color:  rgba(200,169,110,0.12); }
+.page--dark .stats-bar       { border-top-color:    rgba(200,169,110,0.12);
+                                border-bottom-color: rgba(200,169,110,0.12); }
+.page--dark .stat            { border-right-color:  rgba(200,169,110,0.12); }
+
+/* Search card */
+.page--dark .search-card     { background: #1A1710; border-color: rgba(200,169,110,0.12); }
+.page--dark .result-dot      { background: var(--surface); }
+.page--dark .result-line     { background: var(--surface); }
+.page--dark .floating-tag    { background: var(--ink); color: var(--cream); }
+
+/* How-it-works section */
+.page--dark .how-section     { background: var(--surface); }
+.page--dark .step-card       { background: var(--cream); border-color: rgba(200,169,110,0.1); }
+.page--dark .step-num        { color: rgba(245,240,232,0.06); }
+
+/* Features */
+.page--dark .feat-card       { background: var(--surface); border-color: rgba(200,169,110,0.1); }
+.page--dark .accent-card     { background: rgba(200,169,110,0.15); border-color: rgba(200,169,110,0.25); }
+.page--dark .accent-card .feat-card-label { color: rgba(200,169,110,0.6); }
+.page--dark .accent-card .feat-big-num    { color: var(--accent); }
+.page--dark .tag             { border-color: rgba(200,169,110,0.2); color: var(--muted); }
+
+/* Pricing */
+.page--dark .pricing-section { background: var(--surface); }
+.page--dark .pricing-card    { background: var(--cream); border-color: rgba(200,169,110,0.1); }
+.page--dark .pricing-card-accent { background: rgba(200,169,110,0.1); border-color: rgba(200,169,110,0.3); }
+.page--dark .pricing-card-accent .pricing-name  { color: rgba(200,169,110,0.6); }
+.page--dark .pricing-card-accent .pricing-price { color: rgba(245,240,232,0.5); }
+.page--dark .pricing-card-accent .price-big     { color: var(--accent); }
+.page--dark .pricing-card-accent .pricing-features li { color: rgba(245,240,232,0.55); }
+.page--dark .btn-outline     { border-color: rgba(200,169,110,0.25); color: var(--ink); }
+.page--dark .btn-outline:hover { border-color: var(--accent); }
+
+/* CTA banner */
+.page--dark .cta-banner      { background: rgba(200,169,110,0.08); border-top: 1px solid rgba(200,169,110,0.15); }
+
+/* Section dividers */
+.page--dark .section         { border-top-color: rgba(200,169,110,0.1); }
