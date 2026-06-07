@@ -1,14 +1,16 @@
+// app/api/saved/[id]/route.ts
 import { NextResponse } from "next/server";
 import { getServerSession } from "next-auth";
 import { authOptions } from "@/lib/auth";
 import { prisma } from "@/lib/db";
 
-// DELETE — remove a saved image by ID
 export async function DELETE(
   request: Request,
-  { params }: { params: { id: string } }
+  { params }: { params: Promise<{ id: string }> }  // ✅ Promise wrapping
 ) {
   try {
+    const { id } = await params;                     // ✅ await before use
+
     const session = await getServerSession(authOptions);
     if (!session?.user?.email) {
       return NextResponse.json(
@@ -31,7 +33,7 @@ export async function DELETE(
     // Make sure the image belongs to this user
     const savedImage = await prisma.savedImage.findFirst({
       where: {
-        id: params.id,
+        id,
         userId: user.id,
       },
     });
@@ -44,7 +46,7 @@ export async function DELETE(
     }
 
     await prisma.savedImage.delete({
-      where: { id: params.id },
+      where: { id },
     });
 
     return NextResponse.json({
