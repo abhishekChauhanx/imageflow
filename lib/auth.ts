@@ -7,16 +7,28 @@ import { prisma } from "./db";
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   providers: [
-    GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID!,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
-      allowDangerousEmailAccountLinking: false,
-    }),
+  GoogleProvider({
+  clientId: process.env.GOOGLE_CLIENT_ID!,
+  clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+  allowDangerousEmailAccountLinking: false,
+  authorization: {
+    params: {
+      prompt: "select_account consent",
+      access_type: "offline",
+      response_type: "code",
+    },
+  },
+}),
     GitHubProvider({
-      clientId: process.env.GITHUB_CLIENT_ID!,
-      clientSecret: process.env.GITHUB_CLIENT_SECRET!,
-      allowDangerousEmailAccountLinking: false,
-    }),
+  clientId: process.env.GITHUB_CLIENT_ID!,
+  clientSecret: process.env.GITHUB_CLIENT_SECRET!,
+  allowDangerousEmailAccountLinking: false,
+  authorization: {
+    params: {
+      login: "", // forces GitHub account picker every time
+    },
+  },
+}),
   ],
   session: {
     strategy: "jwt",

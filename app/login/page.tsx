@@ -1,8 +1,21 @@
 "use client";
 
-import { signIn } from "next-auth/react";
+import { signIn, signOut, useSession } from "next-auth/react";
 
 export default function LoginPage() {
+  const { data: session } = useSession();
+
+  const handleSignIn = async (provider: "github" | "google") => {
+    if (session) {
+      await signOut({ redirect: false });
+    }
+    if (provider === "github") {
+      signIn("github", { callbackUrl: "/dashboard" }, { login: "" });
+    } else {
+      signIn("google", { callbackUrl: "/dashboard" }, { prompt: "select_account" });
+    }
+  };
+
   return (
     <div className="min-h-screen bg-zinc-950 flex items-center justify-center">
       <div className="w-full max-w-md px-8 py-10 bg-zinc-900 rounded-2xl border border-zinc-800 shadow-2xl">
@@ -27,7 +40,7 @@ export default function LoginPage() {
 
           {/* GitHub Button */}
           <button
-            onClick={() => signIn("github", { callbackUrl: "/dashboard" })}
+            onClick={() => handleSignIn("github")}
             className="flex items-center justify-center gap-3 w-full px-4 py-3 bg-white text-black font-semibold rounded-lg hover:bg-zinc-200 transition duration-200"
           >
             <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -38,7 +51,7 @@ export default function LoginPage() {
 
           {/* Google Button */}
           <button
-            onClick={() => signIn("google", { callbackUrl: "/dashboard" })}
+            onClick={() => handleSignIn("google")}
             className="flex items-center justify-center gap-3 w-full px-4 py-3 bg-zinc-800 text-white font-semibold rounded-lg border border-zinc-700 hover:bg-zinc-700 transition duration-200"
           >
             <svg className="w-5 h-5" viewBox="0 0 24 24">
