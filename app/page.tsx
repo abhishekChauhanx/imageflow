@@ -7,36 +7,17 @@ import TrueFocus from "@/components/TrueFocus/TrueFocus";
 import ScrollReveal from "@/components/ScrollReveal/ScrollReveal";
 import CountUp from "@/components/CountUp/CountUp";
 import Footer from "@/components/Footer/Footer";
-import { useAppDispatch, useAppSelector } from "@/store/hooks";
-import { toggleTheme } from "@/store/themeSlice";
+import { useAppSelector } from "@/store/hooks";
 import "./HomePage.css";
+import PublicNav from "@/components/PublicNav/PublicNav";
 
 export default function Home() {
-  const dispatch = useAppDispatch();
-  const mode = useAppSelector((state) => state.theme.mode);
-  const dark = mode === "dark";
+ const dark = useAppSelector((state) => state.theme.mode) === "dark";
 
   return (
     <div className={`page${dark ? " page--dark" : ""}`}>
-
       {/* ── NAV ─────────────────────────────── */}
-      <nav>
-        <BlurText text="ImageFlow" className="nav-logo" as="span" delay={0} stepDelay={90} />
-        <ul className="nav-links">
-          <li><TrueFocus><a href="#how"><BlurText text="How it works" delay={200} stepDelay={45} /></a></TrueFocus></li>
-          <li><TrueFocus><a href="#pricing"><BlurText text="Pricing" delay={380} stepDelay={45} /></a></TrueFocus></li>
-          <li><TrueFocus><a href="/login"><BlurText text="Sign in" delay={530} stepDelay={45} /></a></TrueFocus></li>
-          <li>
-            <button
-              className="theme-toggle"
-              onClick={() => dispatch(toggleTheme())}
-              aria-label="Toggle theme"
-            >
-              {dark ? "☀ Light" : "◐ Dark"}
-            </button>
-          </li>
-        </ul>
-      </nav>
+      <PublicNav />
 
       {/* ── HERO ────────────────────────────── */}
       <div className="hero">

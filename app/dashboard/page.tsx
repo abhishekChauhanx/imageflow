@@ -8,6 +8,7 @@ import { useRouter } from "next/navigation";
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { toggleTheme } from "@/store/themeSlice";
 import "./DashboardPage.css";
+import DashNav from "@/components/DashNav/DashNav";
 
 interface ImageResult {
   imageUrl: string;
@@ -133,48 +134,7 @@ export default function DashboardPage() {
       <div className="dash-grain" />
 
       {/* ── NAV ── */}
-      <nav className="dash-nav">
-        <span className="dash-logo" onClick={() => router.push("/")}>ImageFlow</span>
-
-        <ul className="dash-nav-links">
-          <li>
-            <button className="dash-nav-btn" onClick={() => router.push("/history")}>
-              History
-            </button>
-          </li>
-          <li>
-            <button className="dash-nav-btn" onClick={() => router.push("/saved")}>
-              Saved
-            </button>
-          </li>
-        </ul>
-
-        <div className="dash-nav-right">
-          <span className="dash-user-email">{session?.user?.email}</span>
-
-          {session?.user?.image ? (
-            <img
-              src={session.user.image}
-              alt="avatar"
-              className="dash-avatar dash-avatar-img"
-            />
-          ) : (
-            <div className="dash-avatar dash-avatar-init">{initials}</div>
-          )}
-
-          <button
-            className="theme-toggle"
-            onClick={() => dispatch(toggleTheme())}
-            aria-label="Toggle theme"
-          >
-            {dark ? "☀ Light" : "◐ Dark"}
-          </button>
-
-          <button className="dash-logout" onClick={handleLogout}>
-            Logout
-          </button>
-        </div>
-      </nav>
+     <DashNav/>
 
       {/* ── MAIN ── */}
       <main className="dash-main">
