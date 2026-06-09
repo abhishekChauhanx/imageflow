@@ -6,6 +6,8 @@ import ReduxProvider from "@/components/ReduxProvider/ReduxProvider";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
 
+import { NextIntlClientProvider } from "next-intl";
+import { getLocale, getMessages } from "next-intl/server";
 export const metadata: Metadata = {
   title: "ImageFlow",
   description: "Describe any image, find it across the web",
@@ -17,10 +19,13 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   const session = await getServerSession(authOptions);
-
+ const locale = await getLocale();
+  const messages = await getMessages();
   return (
     <html lang="en">
       <body>
+                <NextIntlClientProvider locale={locale} messages={messages}>
+
         <ReduxProvider>
           <SessionProvider session={session}>
             <Toaster
@@ -42,6 +47,7 @@ export default async function RootLayout({
             {children}
           </SessionProvider>
         </ReduxProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

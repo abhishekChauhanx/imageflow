@@ -1,0 +1,136 @@
+{
+  "home":{
+  "hero": {
+    "eyebrow": "Mesin Pencari Visual",
+    "description": "Ketik apa yang Anda lihat dalam bahasa sehari-hari — mobil vintage merah di jalan pantai, seorang wanita berbaju kuning sedang membaca — dan ImageFlow akan menemukannya dari seluruh web.",
+    "cta_primary": "Mulai Sekarang",
+    "cta_secondary": "Lihat cara kerjanya",
+    "search_label": "Deskripsi Anda",
+    "search_query": "\"mercusuar tua saat senja, langit oranye\"",
+    "floating_tag": "12 kecocokan ditemukan",
+    "falling_lines": [
+      "Deskripsikan.",
+      "Temukan.",
+      "Di mana saja."
+    ]
+  },
+  "stats": [
+    {
+      "label": "Gambar terindeks"
+    },
+    {
+      "label": "Rata-rata waktu pencarian"
+    },
+    {
+      "label": "Akurasi kecocokan"
+    },
+    {
+      "label": "Sumber yang didukung"
+    }
+  ],
+  "how_it_works": {
+    "eyebrow": "Cara kerjanya",
+    "title": "Tiga langkah menuju gambar apapun",
+    "steps": [
+      {
+        "title": "Deskripsikan",
+        "body": "Tulis apa yang Anda lihat dalam bahasa sehari-hari. Tanpa kata kunci, tanpa tag — cukup kalimat alami."
+      },
+      {
+        "title": "Cari",
+        "body": "Model multimodal kami mengubah kata-kata Anda menjadi embedding visual dan memindai 2,4 miliar gambar dalam waktu kurang dari 140ms."
+      },
+      {
+        "title": "Temukan",
+        "body": "Hasil terperingkat menampilkan kecocokan visual terdekat dengan atribusi sumber dan info lisensi."
+      }
+    ]
+  },
+  "features": {
+    "eyebrow": "Fitur",
+    "title": "Dibuat untuk kreator\ndan pengembang",
+    "body": "ImageFlow berbicara dalam dua bahasa. UI yang bersih untuk desainer dan fotografer, API REST yang powerful untuk engineer yang membangun pencarian visual ke dalam produk mereka.",
+    "list": [
+      {
+        "label": "Kueri bahasa alami",
+        "desc": "Tanpa operator boolean atau tag — cukup deskripsikan apa yang Anda lihat."
+      },
+      {
+        "label": "REST & GraphQL API",
+        "desc": "Akses programatik penuh dengan SDK untuk JS, Python, dan Go."
+      },
+      {
+        "label": "Pencarian gambar terbalik",
+        "desc": "Unggah gambar dan temukan hasil yang serupa secara visual secara instan."
+      },
+      {
+        "label": "Pemrosesan batch",
+        "desc": "Jalankan ribuan kueri secara asinkron melalui webhook."
+      }
+    ],
+    "card": {
+      "query_label": "Kueri",
+      "query_text": "\"jalan hutan berkabut di musim gugur, cahaya keemasan\"",
+      "tags": [
+        "Alam",
+        "Kecocokan 98,2%",
+        "Bebas royalti"
+      ],
+      "api_calls_label": "Panggilan API hari ini",
+      "latency_label": "Latensi rata-rata"
+    }
+  },
+  "pricing": {
+    "eyebrow": "Harga",
+    "title": "Sederhana, transparan",
+    "badge": "Paling populer",
+    "plans": [
+      {
+        "name": "Gratis",
+        "unit": "/bln",
+        "features": [
+          "500 kueri / bulan",
+          "Akses Web UI",
+          "Dukungan komunitas",
+          "3 sumber"
+        ],
+        "cta": "Mulai sekarang"
+      },
+      {
+        "name": "Pro",
+        "unit": "/bln",
+        "features": [
+          "50.000 kueri / bulan",
+          "REST & GraphQL API",
+          "Dukungan prioritas",
+          "50+ sumber",
+          "Pemrosesan batch"
+        ],
+        "cta": "Mulai uji coba gratis"
+      },
+      {
+        "name": "Enterprise",
+        "unit": "+ kustom /bln",
+        "features": [
+          "Kueri tak terbatas",
+          "Infrastruktur khusus",
+          "Jaminan SLA",
+          "Sumber kustom",
+          "SSO / SAML"
+        ],
+        "cta": "Hubungi kami"
+      }
+    ]
+  },
+  "cta_banner": {
+    "eyebrow": "Siap untuk mencari lebih cerdas?",
+    "title": "Mulai gratis.\nSkalakan saat Anda siap.",
+    "cta": "Buat akun gratis"
+  }
+},
+  "nav": {
+    "how": "Cara kerja",
+    "pricing": "Harga",
+    "signin": "Masuk"
+  }
+}

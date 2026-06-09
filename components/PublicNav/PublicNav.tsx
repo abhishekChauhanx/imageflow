@@ -5,9 +5,19 @@ import { toggleTheme } from "@/store/themeSlice";
 import BlurText from "@/components/BlurText/BlurText";
 import TrueFocus from "@/components/TrueFocus/TrueFocus";
 
+import { useTranslations } from "next-intl";
+import "./PublicNav.css"
+import SelectLang from "../SelectLang/SelectLang";
+
+
 export default function PublicNav() {
   const dispatch = useAppDispatch();
   const dark = useAppSelector((s) => s.theme.mode) === "dark";
+
+
+  const t = useTranslations("nav");
+
+
 
   return (
     <nav>
@@ -16,24 +26,30 @@ export default function PublicNav() {
         <li>
           <TrueFocus>
             <a href="#how">
-              <BlurText text="How it works" delay={200} stepDelay={45} />
+              <BlurText text={t("how")} delay={200} stepDelay={45} />
             </a>
           </TrueFocus>
         </li>
         <li>
           <TrueFocus>
             <a href="#pricing">
-              <BlurText text="Pricing" delay={380} stepDelay={45} />
+              <BlurText text={t("pricing")} delay={380} stepDelay={45} />
             </a>
           </TrueFocus>
         </li>
         <li>
           <TrueFocus>
             <a href="/login">
-              <BlurText text="Sign in" delay={530} stepDelay={45} />
+              <BlurText text={t("signin")} delay={530} stepDelay={45} />
             </a>
           </TrueFocus>
         </li>
+
+        {/* Language Switcher */}
+
+
+        <SelectLang />
+
         <li>
           <button
             className="theme-toggle"

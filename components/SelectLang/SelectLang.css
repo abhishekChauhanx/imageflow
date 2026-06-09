@@ -1,0 +1,24 @@
+.lang-switcher {
+    background: #C8A96E;
+    padding: 5px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    color: inherit;
+    /* respects dark/light theme */
+    outline: none;
+
+    &:hover {
+        background-color: black;
+        color: #fff;
+    }
+}
+
+.lang-switcher:hover {
+    opacity: 0.75;
+}
+
+/* Dark mode — browser default select bg can look off */
+.dark .lang-switcher {
+    background: #1a1a1a;
+    color: #fff;
+}

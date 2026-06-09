@@ -1,0 +1,136 @@
+{
+  "home":{
+  "hero": {
+    "eyebrow": "Visual Search Engine",
+    "description": "Type what you see in plain language — a red vintage car on a coastal road, a woman in a yellow dress reading — and ImageFlow surfaces it from across the web.",
+    "cta_primary": "Get Started",
+    "cta_secondary": "See how it works",
+    "search_label": "Your description",
+    "search_query": "\"old lighthouse at dusk, orange sky\"",
+    "floating_tag": "12 matches found",
+    "falling_lines": [
+      "Describe it.",
+      "Find it.",
+      "Anywhere."
+    ]
+  },
+  "stats": [
+    { 
+      "label": "Images indexed"
+    },
+    {
+      "label": "Avg. search time"
+    },
+    {
+      "label": "Match accuracy"
+    },
+    {
+      "label": "Supported sources"
+    }
+  ],
+  "how_it_works": {
+    "eyebrow": "How it works",
+    "title": "Three steps to any image",
+    "steps": [
+      {
+        "title": "Describe",
+        "body": "Write what you see in plain English. No keywords, no tags — just a natural sentence."
+      },
+      {
+        "title": "Search",
+        "body": "Our multimodal model converts your words into a visual embedding and scans 2.4B images in under 140ms."
+      },
+      {
+        "title": "Find",
+        "body": "Ranked results surface the closest visual matches with source attribution and licensing info."
+      }
+    ]
+  },
+  "features": {
+    "eyebrow": "Features",
+    "title": "Built for creators\nand developers",
+    "body": "ImageFlow speaks both languages. A clean UI for designers and photographers, a powerful REST API for engineers building visual search into their products.",
+    "list": [
+      {
+        "label": "Natural language queries",
+        "desc": "No boolean operators or tags — just describe what you see."
+      },
+      {
+        "label": "REST & GraphQL API",
+        "desc": "Full programmatic access with SDKs for JS, Python and Go."
+      },
+      {
+        "label": "Reverse image search",
+        "desc": "Upload an image and find visually similar results instantly."
+      },
+      {
+        "label": "Batch processing",
+        "desc": "Run thousands of queries asynchronously via webhooks."
+      }
+    ],
+    "card": {
+      "query_label": "Query",
+      "query_text": "\"misty forest path in autumn, golden light\"",
+      "tags": [
+        "Nature",
+        "98.2% match",
+        "Royalty free"
+      ],
+      "api_calls_label": "API calls today",
+      "latency_label": "Avg latency"
+    }
+  },
+  "pricing": {
+    "eyebrow": "Pricing",
+    "title": "Simple, transparent",
+    "badge": "Most popular",
+    "plans": [
+      {
+        "name": "Free",
+        "unit": "/mo",
+        "features": [
+          "500 queries / month",
+          "Web UI access",
+          "Community support",
+          "3 sources"
+        ],
+        "cta": "Get started"
+      },
+      {
+        "name": "Pro",
+        "unit": "/mo",
+        "features": [
+          "50 000 queries / month",
+          "REST & GraphQL API",
+          "Priority support",
+          "50+ sources",
+          "Batch processing"
+        ],
+        "cta": "Start free trial"
+      },
+      {
+        "name": "Enterprise",
+        "unit": "+ custom /mo",
+        "features": [
+          "Unlimited queries",
+          "Dedicated infra",
+          "SLA guarantee",
+          "Custom sources",
+          "SSO / SAML"
+        ],
+        "cta": "Contact us"
+      }
+    ]
+  },
+  "cta_banner": {
+    "eyebrow": "Ready to search smarter?",
+    "title": "Start for free.\nScale when you're ready.",
+    "cta": "Create free account"
+  }
+},
+  "nav": {
+    "how": "How it works",
+    "pricing": "Pricing",
+    "signin": "Sign in"
+  }
+}
