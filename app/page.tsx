@@ -15,20 +15,20 @@ import "./HomePage.css";
 export default function Home() {
   const dark = useAppSelector((state) => state.theme.mode) === "dark";
 
-  const t   = useTranslations("home");        // scoped to the "home" key
-  const th  = useTranslations("home.hero");
+  const t = useTranslations("home");
+  const th = useTranslations("home.hero");
   const th2 = useTranslations("home.how_it_works");
-  const tf  = useTranslations("home.features");
-  const tp  = useTranslations("home.pricing");
-  const tc  = useTranslations("home.cta_banner");
+  const tf = useTranslations("home.features");
+  const tp = useTranslations("home.pricing");
+  const tc = useTranslations("home.cta_banner");
 
   // Arrays — next-intl raw access
-  const fallingLines  = t.raw("hero.falling_lines")  as string[];
-  const statLabels    = t.raw("stats")                as { label: string }[];
-  const steps         = t.raw("how_it_works.steps")  as { title: string; body: string }[];
-  const featureList   = t.raw("features.list")        as { label: string; desc: string }[];
-  const featureTags   = t.raw("features.card.tags")   as string[];
-  const plans         = t.raw("pricing.plans")        as {
+  const fallingLines = t.raw("hero.falling_lines") as string[];
+  const statLabels = t.raw("stats") as { label: string }[];
+  const steps = t.raw("how_it_works.steps") as { title: string; body: string }[];
+  const featureList = t.raw("features.list") as { label: string; desc: string }[];
+  const featureTags = t.raw("features.card.tags") as string[];
+  const plans = t.raw("pricing.plans") as {
     name: string; unit: string; features: string[]; cta: string;
   }[];
 
@@ -73,7 +73,7 @@ export default function Home() {
                 {[
                   { cls: "gold", short: false },
                   { cls: "dark", short: true },
-                  { cls: "",     short: false },
+                  { cls: "", short: false },
                 ].map((item, i) => (
                   <div className="result-item" key={i}>
                     <div className={`result-dot ${item.cls}`} />
@@ -91,9 +91,9 @@ export default function Home() {
       <div className="stats-bar">
         {[
           { end: 2.4, suffix: "B+", decimals: 1 },
-          { end: 140,  suffix: "ms", decimals: 0 },
-          { end: 98,   suffix: "%",  decimals: 0 },
-          { end: 50,   suffix: "+",  decimals: 0 },
+          { end: 140, suffix: "ms", decimals: 0 },
+          { end: 98, suffix: "%", decimals: 0 },
+          { end: 50, suffix: "+", decimals: 0 },
         ].map((s, i) => (
           <div className="stat" key={i}>
             <CountUp end={s.end} suffix={s.suffix} decimals={s.decimals} duration={1800} className="stat-number" />
@@ -113,7 +113,7 @@ export default function Home() {
             <ScrollReveal key={i} delay={i * 140} direction="up">
               <div className="step-card">
                 <span className="step-num">{String(i + 1).padStart(2, "0")}</span>
-                <span className="step-icon">{["✏️","⚡","🎯"][i]}</span>
+                <span className="step-icon">{["✏️", "⚡", "🎯"][i]}</span>
                 <h3 className="step-title">{step.title}</h3>
                 <p className="step-body">{step.body}</p>
               </div>
@@ -204,9 +204,8 @@ export default function Home() {
         <section className="cta-banner">
           <p className="cta-banner-eyebrow">{tc("eyebrow")}</p>
           <h2 className="cta-banner-title">{tc("title")}</h2>
-          <TrueFocus>
-            <Link href="/login" className="btn-primary btn-large">{tc("cta")}</Link>
-          </TrueFocus>
+
+          <Link href="/login" className="btn-primary btn-large">{tc("cta")}</Link>
         </section>
       </ScrollReveal>
 
