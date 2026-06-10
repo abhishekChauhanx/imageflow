@@ -1,13 +1,9 @@
-import type { NextConfig } from "next";
-import createNextIntlPlugin from "next-intl/plugin";
-
-const withNextIntl = createNextIntlPlugin("./i18n/request.ts");
-
-const nextConfig: NextConfig = {
-  reactCompiler: true,
-  images: {
-    domains: [],
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  serverExternalPackages: ["@prisma/client", "prisma"],
+  experimental: {
+    serverComponentsExternalPackages: ["@prisma/client"],
   },
 };
 
-export default withNextIntl(nextConfig);
+module.exports = nextConfig;
