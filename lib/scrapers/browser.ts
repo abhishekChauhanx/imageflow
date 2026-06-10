@@ -12,7 +12,6 @@ export async function getBrowser(): Promise<Browser> {
 
       browserInstance = await puppeteer.default.launch({
         args: chromium.default.args,
-        defaultViewport: chromium.default.defaultViewport,
         executablePath: await chromium.default.executablePath(),
         headless: true,
       });
