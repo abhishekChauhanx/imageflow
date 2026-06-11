@@ -1,7 +1,7 @@
 "use client";
 
 import { signIn } from "next-auth/react";
-import {  useAppSelector } from "@/store/hooks";
+import { useAppSelector } from "@/store/hooks";
 
 import { useEffect, useRef, useState } from "react";
 import "./LoginPage.css";
@@ -30,7 +30,6 @@ function GoldenCanvas({ dark }: { dark: boolean }) {
       phase: Math.random() * Math.PI * 2,
     }));
 
-    /* thin connecting lines between nearby points */
     const connect = () => {
       for (let i = 0; i < pts.length; i++) {
         for (let j = i + 1; j < pts.length; j++) {
@@ -65,7 +64,6 @@ function GoldenCanvas({ dark }: { dark: boolean }) {
       });
       connect();
 
-      /* large slow rings */
       [
         { cx: W * 0.15, cy: H * 0.25, r: 180, sp: 0.0015 },
         { cx: W * 0.85, cy: H * 0.7,  r: 240, sp: 0.001  },
@@ -99,24 +97,44 @@ function GoldenCanvas({ dark }: { dark: boolean }) {
   );
 }
 
+/* ── Eye icon for password toggle ── */
+function EyeIcon({ open }: { open: boolean }) {
+  return open ? (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+      <circle cx="12" cy="12" r="3"/>
+    </svg>
+  ) : (
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+      <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+      <line x1="1" y1="1" x2="23" y2="23"/>
+    </svg>
+  );
+}
+
 export default function LoginPage() {
   const mode = useAppSelector((s) => s.theme.mode);
   const dark = mode === "dark";
+
   const [hoverGH, setHoverGH] = useState(false);
   const [hoverGG, setHoverGG] = useState(false);
+  const [hoverLogin, setHoverLogin] = useState(false);
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPw, setShowPw] = useState(false);
+  const [emailFocus, setEmailFocus] = useState(false);
+  const [pwFocus, setPwFocus] = useState(false);
 
   return (
     <div className={`lp${dark ? " lp--dark" : ""}`}>
       <GoldenCanvas dark={dark} />
-
-      {/* grain */}
       <div className="lp-grain" />
 
-      {/* ── LEFT PANEL — editorial art side ── */}
+      {/* ── LEFT PANEL ── */}
       <aside className="lp-left">
         <div className="lp-left-inner">
-
-          {/* decorative roman numeral frame */}
           <div className="lp-roman-frame">
             <span className="lp-roman">I</span>
             <div className="lp-roman-rule" />
@@ -125,21 +143,16 @@ export default function LoginPage() {
 
           <div className="lp-left-content">
             <p className="lp-left-eyebrow">Est. 2024 · Visual Intelligence</p>
-
             <h2 className="lp-left-headline">
               See the<br />
               <em>world</em><br />
               differently.
             </h2>
-
             <div className="lp-left-divider" />
-
             <p className="lp-left-body">
               Two billion four hundred million images.<br />
               One sentence. Infinite possibility.
             </p>
-
-            {/* ornate quote */}
             <blockquote className="lp-quote">
               <span className="lp-quote-mark">"</span>
               The image you imagine already exists. We simply find it.
@@ -147,7 +160,6 @@ export default function LoginPage() {
             </blockquote>
           </div>
 
-          {/* bottom stats */}
           <div className="lp-left-stats">
             {[
               { num: "2.4B+", label: "Images Indexed" },
@@ -161,21 +173,14 @@ export default function LoginPage() {
             ))}
           </div>
         </div>
-
-        {/* vertical text watermark */}
         <span className="lp-watermark">IMAGEFLOW</span>
       </aside>
 
-      {/* ── RIGHT PANEL — login form ── */}
+      {/* ── RIGHT PANEL ── */}
       <main className="lp-right">
+        <LoginNav />
 
-        {/* top bar */}
-        <LoginNav/>
-
-        {/* centre card */}
         <div className="lp-card">
-
-          {/* four corner ornaments */}
           {["tl","tr","bl","br"].map((c) => (
             <span key={c} className={`lp-corner lp-corner-${c}`}>✦</span>
           ))}
@@ -187,17 +192,98 @@ export default function LoginPage() {
             <p className="lp-card-sub">Sign in to your atelier</p>
           </div>
 
+          {/* ── EMAIL / PASSWORD FORM ── */}
+          <div className="lp-form">
+
+            {/* Email field */}
+            <div className={`lp-field${emailFocus ? " lp-field--focus" : ""}${email ? " lp-field--filled" : ""}`}>
+              <label className="lp-field-label" htmlFor="lp-email">Email address</label>
+              <div className="lp-field-wrap">
+                <svg className="lp-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="2" y="4" width="20" height="16" rx="2"/>
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                </svg>
+                <input
+                  id="lp-email"
+                  className="lp-field-input"
+                  type="email"
+                  placeholder="you@example.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  onFocus={() => setEmailFocus(true)}
+                  onBlur={() => setEmailFocus(false)}
+                  autoComplete="email"
+                />
+              </div>
+              <span className="lp-field-line" />
+            </div>
+
+            {/* Password field */}
+            <div className={`lp-field${pwFocus ? " lp-field--focus" : ""}${password ? " lp-field--filled" : ""}`}>
+              <label className="lp-field-label" htmlFor="lp-password">Password</label>
+              <div className="lp-field-wrap">
+                <svg className="lp-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                  <rect x="3" y="11" width="18" height="11" rx="2"/>
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                </svg>
+                <input
+                  id="lp-password"
+                  className="lp-field-input"
+                  type={showPw ? "text" : "password"}
+                  placeholder="••••••••"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  onFocus={() => setPwFocus(true)}
+                  onBlur={() => setPwFocus(false)}
+                  autoComplete="current-password"
+                />
+                <button
+                  type="button"
+                  className="lp-pw-toggle"
+                  onClick={() => setShowPw((v) => !v)}
+                  aria-label={showPw ? "Hide password" : "Show password"}
+                >
+                  <EyeIcon open={showPw} />
+                </button>
+              </div>
+              <span className="lp-field-line" />
+            </div>
+
+            {/* Forgot password */}
+            <div className="lp-form-meta">
+              <button type="button" className="lp-forgot">Forgot password?</button>
+            </div>
+
+            {/* Login button */}
+            <button
+              type="button"
+              className={`lp-btn lp-btn-primary${hoverLogin ? " lp-btn-hovered" : ""}`}
+              onMouseEnter={() => setHoverLogin(true)}
+              onMouseLeave={() => setHoverLogin(false)}
+            >
+              <span className="lp-btn-bg" />
+              <span className="lp-btn-content">
+                <span className="lp-btn-label" style={{ textAlign: "center", flex: 1 }}>Sign In</span>
+                <span className="lp-btn-arrow">→</span>
+              </span>
+            </button>
+
+            {/* Create account */}
+            <p className="lp-create">
+              New here?{" "}
+              <button type="button" className="lp-create-link">Create an account</button>
+            </p>
+          </div>
+
           {/* rule with text */}
           <div className="lp-rule-row">
             <span className="lp-rule" />
-            <span className="lp-rule-text">Continue with</span>
+            <span className="lp-rule-text">Or continue with</span>
             <span className="lp-rule" />
           </div>
 
-          {/* ── BUTTONS ── */}
+          {/* ── OAUTH BUTTONS ── */}
           <div className="lp-btns">
-
-            {/* GitHub */}
             <button
               className={`lp-btn lp-btn-gh${hoverGH ? " lp-btn-hovered" : ""}`}
               onMouseEnter={() => setHoverGH(true)}
@@ -214,7 +300,6 @@ export default function LoginPage() {
               </span>
             </button>
 
-            {/* Google */}
             <button
               className={`lp-btn lp-btn-gg${hoverGG ? " lp-btn-hovered" : ""}`}
               onMouseEnter={() => setHoverGG(true)}
@@ -243,8 +328,7 @@ export default function LoginPage() {
           </p>
         </div>
 
-        {/* footer */}
-      <Footer/>
+        <Footer />
       </main>
     </div>
   );

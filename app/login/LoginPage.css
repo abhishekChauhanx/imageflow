@@ -14,6 +14,8 @@
   --muted:    #7A7060;
   --border:   rgba(10,8,4,0.10);
   --surface:  #EDEAE0;
+  --field-bg: rgba(10,8,4,0.03);
+  --field-border: rgba(10,8,4,0.13);
 
   min-height: 100vh;
   display: grid;
@@ -27,13 +29,15 @@
 
 /* ── DARK ── */
 .lp--dark {
-  --cream:    #0A0806;
-  --cream2:   #110E09;
-  --ink:      #F0EBE0;
-  --ink2:     #D4CFC4;
-  --surface:  #13100A;
-  --border:   rgba(200,169,110,0.13);
-  --muted:    #8A8070;
+  --cream:       #0A0806;
+  --cream2:      #110E09;
+  --ink:         #F0EBE0;
+  --ink2:        #D4CFC4;
+  --surface:     #13100A;
+  --border:      rgba(200,169,110,0.13);
+  --muted:       #8A8070;
+  --field-bg:    rgba(200,169,110,0.04);
+  --field-border: rgba(200,169,110,0.18);
 }
 
 /* ── GRAIN ── */
@@ -44,7 +48,7 @@
 }
 
 /* ═══════════════════════════════════════════════════
-   LEFT PANEL — editorial / art side
+   LEFT PANEL
    ═══════════════════════════════════════════════════ */
 .lp-left {
   position: relative;
@@ -55,7 +59,6 @@
   z-index: 2;
 }
 
-/* animated gold gradient sweep */
 .lp-left::before {
   content: '';
   position: absolute; inset: 0;
@@ -66,7 +69,6 @@
   pointer-events: none;
 }
 
-/* fine diagonal line texture */
 .lp-left::after {
   content: '';
   position: absolute; inset: 0;
@@ -90,7 +92,6 @@
   width: 100%;
 }
 
-/* Roman numeral ornament */
 .lp-roman-frame {
   display: flex;
   align-items: center;
@@ -112,7 +113,6 @@
   opacity: 0.3;
 }
 
-/* headline */
 .lp-left-content { flex: 1; }
 
 .lp-left-eyebrow {
@@ -159,7 +159,6 @@
   animation: lpFadeUp 0.9s ease 0.35s both;
 }
 
-/* quote */
 .lp-quote {
   font-family: 'Cormorant Garamond', serif;
   font-size: 1rem;
@@ -181,7 +180,6 @@
   font-style: normal;
 }
 
-/* bottom stats */
 .lp-left-stats {
   display: flex;
   gap: 2rem;
@@ -204,7 +202,6 @@
   color: var(--cream2);
 }
 
-/* vertical watermark */
 .lp-watermark {
   position: absolute;
   right: -2.5rem;
@@ -221,15 +218,17 @@
 }
 
 /* ═══════════════════════════════════════════════════
-   RIGHT PANEL — login
+   RIGHT PANEL
    ═══════════════════════════════════════════════════ */
 .lp-right {
   position: relative;
   z-index: 2;
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   background: var(--cream);
   transition: background 0.5s;
+  overflow-y: auto;
 }
 
 /* ── TOP BAR ── */
@@ -261,16 +260,13 @@
 .lp-theme-btn:hover { color: var(--ink); border-color: var(--accent); }
 
 /* ── CENTRE CARD ── */
-.lp-right {
-  justify-content: space-between;
-}
 .lp-card {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 4rem 3.5rem;
+  padding: 3rem 3.5rem;
   position: relative;
   max-width: 480px;
   width: 100%;
@@ -295,7 +291,7 @@
 /* ── CARD HEADER ── */
 .lp-card-header {
   text-align: center;
-  margin-bottom: 2.75rem;
+  margin-bottom: 2rem;
   width: 100%;
 }
 
@@ -306,7 +302,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  margin: 0 auto 1.75rem;
+  margin: 0 auto 1.5rem;
   font-family: 'Cormorant Garamond', serif;
   font-size: 1rem;
   font-weight: 600;
@@ -315,7 +311,6 @@
   position: relative;
   animation: lpMonogram 1.2s ease both;
 }
-/* four dot corners on monogram */
 .lp-monogram::before,
 .lp-monogram::after {
   content: '·';
@@ -343,13 +338,190 @@
   color: var(--muted);
 }
 
+/* ═══════════════════════════════════════════════════
+   EMAIL / PASSWORD FORM
+   ═══════════════════════════════════════════════════ */
+.lp-form {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-bottom: 1.5rem;
+}
+
+/* ── Individual field ── */
+.lp-field {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1.1rem;
+}
+
+.lp-field-label {
+  display: block;
+  font-size: 0.56rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 0.5rem;
+  transition: color 0.2s;
+}
+.lp-field--focus .lp-field-label {
+  color: var(--accent);
+}
+
+.lp-field-wrap {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--field-bg);
+  border: 1px solid var(--field-border);
+  transition: border-color 0.25s, background 0.25s;
+}
+.lp-field--focus .lp-field-wrap {
+  border-color: var(--accent);
+  background: rgba(200,169,110,0.04);
+}
+.lp-field--filled .lp-field-wrap {
+  border-color: rgba(200,169,110,0.35);
+}
+
+.lp-field-icon {
+  width: 0.85rem;
+  height: 0.85rem;
+  flex-shrink: 0;
+  margin-left: 1rem;
+  color: var(--muted);
+  transition: color 0.2s;
+}
+.lp-field--focus .lp-field-icon {
+  color: var(--accent);
+}
+
+.lp-field-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  padding: 0.85rem 1rem;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.06em;
+  color: var(--ink);
+  width: 100%;
+}
+.lp-field-input::placeholder {
+  color: var(--muted);
+  opacity: 0.5;
+}
+
+/* animated bottom accent line */
+.lp-field-line {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: var(--accent);
+  transition: width 0.35s cubic-bezier(.16,1,.3,1);
+  pointer-events: none;
+}
+.lp-field--focus .lp-field-line {
+  width: 100%;
+}
+
+/* password toggle */
+.lp-pw-toggle {
+  background: none;
+  border: none;
+  padding: 0 1rem;
+  color: var(--muted);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  transition: color 0.2s;
+  flex-shrink: 0;
+}
+.lp-pw-toggle:hover {
+  color: var(--accent);
+}
+
+/* ── Forgot password ── */
+.lp-form-meta {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 1.4rem;
+  margin-top: -0.3rem;
+}
+.lp-forgot {
+  background: none;
+  border: none;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  letter-spacing: 0.1em;
+  color: var(--muted);
+  cursor: pointer;
+  transition: color 0.2s;
+  padding: 0;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.lp-forgot:hover {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+/* ── Primary sign in button ── */
+.lp-btn-primary {
+  border-color: var(--accent) !important;
+  margin-bottom: 0;
+}
+.lp-btn-primary .lp-btn-bg {
+  background: var(--accent) !important;
+}
+.lp-btn-primary .lp-btn-content {
+  color: var(--accent) !important;
+  font-size: 0.7rem !important;
+  letter-spacing: 0.18em !important;
+}
+.lp-btn-primary.lp-btn-hovered .lp-btn-content {
+  color: #0A0806 !important;
+}
+.lp-btn-primary.lp-btn-hovered {
+  box-shadow: 0 8px 32px rgba(200,169,110,0.28) !important;
+}
+
+/* ── Create account ── */
+.lp-create {
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+  text-align: center;
+  margin-top: 1.1rem;
+  margin-bottom: 0;
+}
+.lp-create-link {
+  background: none;
+  border: none;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  color: var(--accent);
+  cursor: pointer;
+  padding: 0;
+  border-bottom: 1px solid transparent;
+  transition: border-color 0.2s;
+}
+.lp-create-link:hover {
+  border-bottom-color: var(--accent);
+}
+
 /* ── RULE ROW ── */
 .lp-rule-row {
   display: flex;
   align-items: center;
   gap: 1rem;
   width: 100%;
-  margin-bottom: 1.75rem;
+  margin-bottom: 1.25rem;
 }
 .lp-rule {
   flex: 1;
@@ -357,20 +529,21 @@
   background: var(--border);
 }
 .lp-rule-text {
-  font-size: 0.58rem;
+  font-size: 0.55rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--muted);
   white-space: nowrap;
+  opacity: 0.7;
 }
 
-/* ── BUTTONS ── */
+/* ── OAUTH BUTTONS ── */
 .lp-btns {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.75rem;
   width: 100%;
-  margin-bottom: 2rem;
+  margin-bottom: 1.5rem;
 }
 
 .lp-btn {
@@ -389,7 +562,6 @@
 }
 .lp-btn:active { transform: translateY(0); }
 
-/* sliding fill background */
 .lp-btn-bg {
   position: absolute;
   inset: 0;
@@ -399,13 +571,13 @@
 }
 .lp-btn-hovered .lp-btn-bg { transform: translateX(0); }
 
-/* GitHub — ink fill on hover */
+/* GitHub */
 .lp-btn-gh { border-color: var(--ink); }
 .lp-btn-gh .lp-btn-bg { background: var(--ink); }
 .lp-btn-gh .lp-btn-content { color: var(--ink); }
 .lp-btn-gh.lp-btn-hovered .lp-btn-content { color: var(--cream); }
 
-/* Google — accent gold fill on hover */
+/* Google */
 .lp-btn-gg { border-color: var(--border); }
 .lp-btn-gg .lp-btn-bg { background: var(--accent); }
 .lp-btn-gg .lp-btn-content { color: var(--muted); }
@@ -418,16 +590,16 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.05rem 1.4rem;
+  padding: 0.9rem 1.4rem;
   font-family: 'DM Mono', monospace;
-  font-size: 0.68rem;
+  font-size: 0.65rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   transition: color 0.3s;
 }
 .lp-btn-icon {
-  width: 1.1rem;
-  height: 1.1rem;
+  width: 1rem;
+  height: 1rem;
   flex-shrink: 0;
 }
 .lp-btn-label { flex: 1; text-align: center; }
@@ -444,7 +616,7 @@
 
 /* ── TERMS ── */
 .lp-terms {
-  font-size: 0.58rem;
+  font-size: 0.55rem;
   color: var(--muted);
   letter-spacing: 0.06em;
   line-height: 1.9;
@@ -515,7 +687,7 @@
   .lp { grid-template-columns: 1fr; }
   .lp-left { display: none; }
   .lp-right { min-height: 100vh; }
-  .lp-card { padding: 3rem 2rem; }
+  .lp-card { padding: 2.5rem 1.75rem; }
   .lp-topbar { padding: 1.5rem 2rem; }
   .lp-footer { padding: 1.25rem 2rem; }
 }
