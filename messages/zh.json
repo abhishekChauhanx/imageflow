@@ -165,5 +165,58 @@
     "privacy": "गोपनीयता नीति",
     "show_password": "पासवर्ड दिखाएं",
     "hide_password": "पासवर्ड छुपाएं"
+  },
+  "signup": {
+    "left": {
+      "eyebrow": "始于 2024 · 视觉智能",
+      "headline_line1": "加入",
+      "headline_em": "工作室",
+      "headline_line2": "就在今天。",
+      "body_line1": "二十四亿张图像。",
+      "body_line2": "一句话。无限可能。",
+      "quote": "每一次搜索都从一句话开始。",
+      "stats": {
+        "images": "已收录图像",
+        "latency": "平均延迟",
+        "sources": "数据源"
+      }
+    },
+    "card": {
+      "title": "创建账户",
+      "subtitle": "加入您的工作室"
+    },
+    "form": {
+      "name_label": "姓名",
+      "name_placeholder": "Abhishek Chauhan",
+      "email_label": "电子邮箱",
+      "email_placeholder": "you@example.com",
+      "password_label": "密码",
+      "password_placeholder": "至少 8 个字符",
+      "confirm_label": "确认密码",
+      "confirm_placeholder": "重复输入密码",
+      "submit": "创建账户",
+      "submitting": "正在创建账户...",
+      "have_account": "已有账户？",
+      "sign_in": "登录"
+    },
+    "divider": "或继续使用",
+    "oauth": {
+      "github": "使用 GitHub 继续",
+      "google": "使用 Google 继续"
+    },
+    "terms": {
+      "prefix": "注册即表示您同意我们的",
+      "tos": "服务条款",
+      "and": "和",
+      "privacy": "隐私政策"
+    },
+    "toast": {
+      "all_fields_required": "所有字段均为必填项",
+      "password_mismatch": "密码不匹配",
+      "password_too_short": "密码至少需要 8 个字符",
+      "signup_success": "账户已创建！正在登录...",
+      "signup_failed": "注册失败",
+      "something_wrong": "出现了一些问题"
+    }
   }
 }

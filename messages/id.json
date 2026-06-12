@@ -163,5 +163,58 @@
     "privacy": "Kebijakan Privasi",
     "show_password": "Tampilkan kata sandi",
     "hide_password": "Sembunyikan kata sandi"
+  },
+  "signup": {
+    "left": {
+      "eyebrow": "Sejak 2024 · Kecerdasan Visual",
+      "headline_line1": "Bergabunglah dengan",
+      "headline_em": "atelier",
+      "headline_line2": "kami hari ini.",
+      "body_line1": "Dua miliar empat ratus juta gambar.",
+      "body_line2": "Satu kalimat. Kemungkinan tak terbatas.",
+      "quote": "Setiap pencarian dimulai dari satu kalimat.",
+      "stats": {
+        "images": "Gambar Terindeks",
+        "latency": "Rata-rata Latensi",
+        "sources": "Sumber"
+      }
+    },
+    "card": {
+      "title": "Buat Akun",
+      "subtitle": "Gabung dengan atelier Anda"
+    },
+    "form": {
+      "name_label": "Nama lengkap",
+      "name_placeholder": "Abhishek Chauhan",
+      "email_label": "Alamat email",
+      "email_placeholder": "you@example.com",
+      "password_label": "Kata sandi",
+      "password_placeholder": "Min. 8 karakter",
+      "confirm_label": "Konfirmasi kata sandi",
+      "confirm_placeholder": "Ulangi kata sandi",
+      "submit": "Buat Akun",
+      "submitting": "Membuat akun...",
+      "have_account": "Sudah punya akun?",
+      "sign_in": "Masuk"
+    },
+    "divider": "Atau lanjutkan dengan",
+    "oauth": {
+      "github": "Lanjutkan dengan GitHub",
+      "google": "Lanjutkan dengan Google"
+    },
+    "terms": {
+      "prefix": "Dengan mendaftar, Anda menyetujui",
+      "tos": "Ketentuan Layanan",
+      "and": "&",
+      "privacy": "Kebijakan Privasi"
+    },
+    "toast": {
+      "all_fields_required": "Semua kolom wajib diisi",
+      "password_mismatch": "Kata sandi tidak cocok",
+      "password_too_short": "Kata sandi minimal 8 karakter",
+      "signup_success": "Akun dibuat! Sedang masuk...",
+      "signup_failed": "Pendaftaran gagal",
+      "something_wrong": "Terjadi kesalahan"
+    }
   }
 }

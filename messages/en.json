@@ -163,5 +163,60 @@
     "privacy": "Privacy Policy",
     "show_password": "Show password",
     "hide_password": "Hide password"
+  },
+  
+    "signup": {
+    "left": {
+      "eyebrow": "Est. 2024 · Visual Intelligence",
+      "headline_line1": "Join the",
+      "headline_em": "atelier.",
+      "headline_line2": "Today.",
+      "body_line1": "Two billion four hundred million images.",
+      "body_line2": "One sentence. Infinite possibility.",
+      "quote": "Every search begins with a single sentence.",
+      "stats": {
+        "images": "Images Indexed",
+        "latency": "Avg. Latency",
+        "sources": "Sources"
+      }
+    },
+    "card": {
+      "title": "Create Account",
+      "subtitle": "Join your atelier"
+    },
+    "form": {
+      "name_label": "Full name",
+      "name_placeholder": "Abhishek Chauhan",
+      "email_label": "Email address",
+      "email_placeholder": "you@example.com",
+      "password_label": "Password",
+      "password_placeholder": "Min. 8 characters",
+      "confirm_label": "Confirm password",
+      "confirm_placeholder": "Repeat password",
+      "submit": "Create Account",
+      "submitting": "Creating account...",
+      "have_account": "Already have an account?",
+      "sign_in": "Sign in"
+    },
+    "divider": "Or continue with",
+    "oauth": {
+      "github": "Continue with GitHub",
+      "google": "Continue with Google"
+    },
+    "terms": {
+      "prefix": "By signing up you agree to our",
+      "tos": "Terms of Service",
+      "and": "&",
+      "privacy": "Privacy Policy"
+    },
+    "toast": {
+      "all_fields_required": "All fields are required",
+      "password_mismatch": "Passwords do not match",
+      "password_too_short": "Password must be at least 8 characters",
+      "signup_success": "Account created! Signing you in...",
+      "signup_failed": "Signup failed",
+      "something_wrong": "Something went wrong"
+    }
   }
+  
 }

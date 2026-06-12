@@ -163,5 +163,58 @@
     "privacy": "개인정보 처리방침",
     "show_password": "비밀번호 표시",
     "hide_password": "비밀번호 숨기기"
+  },
+  "signup": {
+    "left": {
+      "eyebrow": "2024년 설립 · 비주얼 인텔리전스",
+      "headline_line1": "아틀리에에",
+      "headline_em": "지금",
+      "headline_line2": "합류하세요.",
+      "body_line1": "24억 장의 이미지.",
+      "body_line2": "한 문장. 무한한 가능성.",
+      "quote": "모든 검색은 한 문장에서 시작됩니다.",
+      "stats": {
+        "images": "색인된 이미지",
+        "latency": "평균 지연 시간",
+        "sources": "소스"
+      }
+    },
+    "card": {
+      "title": "계정 만들기",
+      "subtitle": "아틀리에에 가입하세요"
+    },
+    "form": {
+      "name_label": "이름",
+      "name_placeholder": "Abhishek Chauhan",
+      "email_label": "이메일 주소",
+      "email_placeholder": "you@example.com",
+      "password_label": "비밀번호",
+      "password_placeholder": "최소 8자",
+      "confirm_label": "비밀번호 확인",
+      "confirm_placeholder": "비밀번호 재입력",
+      "submit": "계정 만들기",
+      "submitting": "계정 생성 중...",
+      "have_account": "이미 계정이 있으신가요?",
+      "sign_in": "로그인"
+    },
+    "divider": "또는 다음으로 계속",
+    "oauth": {
+      "github": "GitHub로 계속하기",
+      "google": "Google로 계속하기"
+    },
+    "terms": {
+      "prefix": "가입함으로써 다음에 동의합니다:",
+      "tos": "서비스 약관",
+      "and": "및",
+      "privacy": "개인정보 보호정책"
+    },
+    "toast": {
+      "all_fields_required": "모든 필드를 입력해야 합니다",
+      "password_mismatch": "비밀번호가 일치하지 않습니다",
+      "password_too_short": "비밀번호는 최소 8자 이상이어야 합니다",
+      "signup_success": "계정이 생성되었습니다! 로그인 중...",
+      "signup_failed": "가입에 실패했습니다",
+      "something_wrong": "문제가 발생했습니다"
+    }
   }
 }

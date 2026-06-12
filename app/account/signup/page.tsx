@@ -8,6 +8,7 @@ import toast from "react-hot-toast";
 import LoginNav from "@/components/LoginNav/loginNav";
 import Footer from "@/components/Footer/Footer";
 import "../LoginPage.css";
+import { useTranslations } from "next-intl";
 
 function EyeIcon({ open }: { open: boolean }) {
   return open ? (
@@ -45,17 +46,19 @@ export default function SignUpPage() {
   const [hoverGG, setHoverGG] = useState(false);
   const [hoverBtn, setHoverBtn] = useState(false);
 
+  const t = useTranslations("signup");
+
   const handleSignup = async () => {
     if (!name || !email || !password || !confirm) {
-      toast.error("All fields are required");
+      toast.error(t("toast.all_fields_required"));
       return;
     }
     if (password !== confirm) {
-      toast.error("Passwords do not match");
+      toast.error(t("toast.password_mismatch"));
       return;
     }
     if (password.length < 8) {
-      toast.error("Password must be at least 8 characters");
+      toast.error(t("toast.password_too_short"));
       return;
     }
 
@@ -70,11 +73,11 @@ export default function SignUpPage() {
       const data = await res.json();
 
       if (!res.ok) {
-        toast.error(data.error || "Signup failed");
+        toast.error(data.error || t("toast.signup_failed"));
         return;
       }
 
-      toast.success("Account created! Signing you in...");
+      toast.success(t("toast.signup_success"));
 
       await signIn("credentials", {
         email,
@@ -83,7 +86,7 @@ export default function SignUpPage() {
         redirect: true,
       });
     } catch {
-      toast.error("Something went wrong");
+      toast.error(t("toast.something_wrong"));
     } finally {
       setLoading(false);
     }
@@ -102,28 +105,28 @@ export default function SignUpPage() {
             <span className="lp-roman">X</span>
           </div>
           <div className="lp-left-content">
-            <p className="lp-left-eyebrow">Est. 2024 · Visual Intelligence</p>
+            <p className="lp-left-eyebrow">{t("left.eyebrow")}</p>
             <h2 className="lp-left-headline">
-              Join the<br />
-              <em>atelier.</em><br />
-              Today.
+              {t("left.headline_line1")}<br />
+              <em>{t("left.headline_em")}</em><br />
+              {t("left.headline_line2")}
             </h2>
             <div className="lp-left-divider" />
             <p className="lp-left-body">
-              Two billion four hundred million images.<br />
-              One sentence. Infinite possibility.
+              {t("left.body_line1")}<br />
+              {t("left.body_line2")}
             </p>
             <blockquote className="lp-quote">
               <span className="lp-quote-mark">"</span>
-              Every search begins with a single sentence.
+              {t("left.quote")}
               <span className="lp-quote-mark">"</span>
             </blockquote>
           </div>
           <div className="lp-left-stats">
             {[
-              { num: "2.4B+", label: "Images Indexed" },
-              { num: "140ms", label: "Avg. Latency" },
-              { num: "50+", label: "Sources" },
+              { num: "2.4B+", label: t("left.stats.images") },
+              { num: "140ms", label: t("left.stats.latency") },
+              { num: "50+",   label: t("left.stats.sources") },
             ].map((s, i) => (
               <div key={i} className="lp-left-stat">
                 <span className="lp-left-stat-num">{s.num}</span>
@@ -146,8 +149,8 @@ export default function SignUpPage() {
 
           <div className="lp-card-header">
             <div className="lp-monogram">IF</div>
-            <h1 className="lp-card-title">Create Account</h1>
-            <p className="lp-card-sub">Join your atelier</p>
+            <h1 className="lp-card-title">{t("card.title")}</h1>
+            <p className="lp-card-sub">{t("card.subtitle")}</p>
           </div>
 
           {/* FORM */}
@@ -155,7 +158,7 @@ export default function SignUpPage() {
 
             {/* Name */}
             <div className={`lp-field${nameFocus ? " lp-field--focus" : ""}${name ? " lp-field--filled" : ""}`}>
-              <label className="lp-field-label" htmlFor="lp-name">Full name</label>
+              <label className="lp-field-label" htmlFor="lp-name">{t("form.name_label")}</label>
               <div className="lp-field-wrap">
                 <svg className="lp-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
@@ -165,7 +168,7 @@ export default function SignUpPage() {
                   id="lp-name"
                   className="lp-field-input"
                   type="text"
-                  placeholder="Abhishek Chauhan"
+                  placeholder={t("form.name_placeholder")}
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   onFocus={() => setNameFocus(true)}
@@ -178,7 +181,7 @@ export default function SignUpPage() {
 
             {/* Email */}
             <div className={`lp-field${emailFocus ? " lp-field--focus" : ""}${email ? " lp-field--filled" : ""}`}>
-              <label className="lp-field-label" htmlFor="lp-email">Email address</label>
+              <label className="lp-field-label" htmlFor="lp-email">{t("form.email_label")}</label>
               <div className="lp-field-wrap">
                 <svg className="lp-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="2" y="4" width="20" height="16" rx="2"/>
@@ -188,7 +191,7 @@ export default function SignUpPage() {
                   id="lp-email"
                   className="lp-field-input"
                   type="email"
-                  placeholder="you@example.com"
+                  placeholder={t("form.email_placeholder")}
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   onFocus={() => setEmailFocus(true)}
@@ -201,7 +204,7 @@ export default function SignUpPage() {
 
             {/* Password */}
             <div className={`lp-field${pwFocus ? " lp-field--focus" : ""}${password ? " lp-field--filled" : ""}`}>
-              <label className="lp-field-label" htmlFor="lp-password">Password</label>
+              <label className="lp-field-label" htmlFor="lp-password">{t("form.password_label")}</label>
               <div className="lp-field-wrap">
                 <svg className="lp-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
                   <rect x="3" y="11" width="18" height="11" rx="2"/>
@@ -211,7 +214,7 @@ export default function SignUpPage() {
                   id="lp-password"
                   className="lp-field-input"
                   type={showPw ? "text" : "password"}
-                  placeholder="Min. 8 characters"
+                  placeholder={t("form.password_placeholder")}
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   onFocus={() => setPwFocus(true)}
@@ -227,7 +230,7 @@ export default function SignUpPage() {
 
             {/* Confirm Password */}
             <div className={`lp-field${confirmFocus ? " lp-field--focus" : ""}${confirm ? " lp-field--filled" : ""}`}>
-              <label className="lp-field-label" htmlFor="lp-confirm">Confirm password</label>
+              <label className="lp-field-label" htmlFor="lp-confirm">{t("form.confirm_label")}</label>
               <div className="lp-field-wrap">
                 <svg className="lp-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
@@ -236,7 +239,7 @@ export default function SignUpPage() {
                   id="lp-confirm"
                   className="lp-field-input"
                   type={showConfirm ? "text" : "password"}
-                  placeholder="Repeat password"
+                  placeholder={t("form.confirm_placeholder")}
                   value={confirm}
                   onChange={(e) => setConfirm(e.target.value)}
                   onFocus={() => setConfirmFocus(true)}
@@ -262,27 +265,27 @@ export default function SignUpPage() {
               <span className="lp-btn-bg" />
               <span className="lp-btn-content">
                 <span className="lp-btn-label" style={{ textAlign: "center", flex: 1 }}>
-                  {loading ? "Creating account..." : "Create Account"}
+                  {loading ? t("form.submitting") : t("form.submit")}
                 </span>
                 {!loading && <span className="lp-btn-arrow">→</span>}
               </span>
             </button>
 
             <p className="lp-create">
-              Already have an account?{" "}
+              {t("form.have_account")}{" "}
               <button
                 type="button"
                 className="lp-create-link"
                 onClick={() => router.push("/account/login")}
               >
-                Sign in
+                {t("form.sign_in")}
               </button>
             </p>
           </div>
 
           <div className="lp-rule-row">
             <span className="lp-rule" />
-            <span className="lp-rule-text">Or continue with</span>
+            <span className="lp-rule-text">{t("divider")}</span>
             <span className="lp-rule" />
           </div>
 
@@ -298,7 +301,7 @@ export default function SignUpPage() {
                 <svg className="lp-btn-icon" fill="currentColor" viewBox="0 0 24 24">
                   <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12" />
                 </svg>
-                <span className="lp-btn-label">Continue with GitHub</span>
+                <span className="lp-btn-label">{t("oauth.github")}</span>
                 <span className="lp-btn-arrow">→</span>
               </span>
             </button>
@@ -317,16 +320,17 @@ export default function SignUpPage() {
                   <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
                   <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
                 </svg>
-                <span className="lp-btn-label">Continue with Google</span>
+                <span className="lp-btn-label">{t("oauth.google")}</span>
                 <span className="lp-btn-arrow">→</span>
               </span>
             </button>
           </div>
 
           <p className="lp-terms">
-            By signing up you agree to our{" "}
-            <span className="lp-terms-link">Terms of Service</span> &amp;{" "}
-            <span className="lp-terms-link">Privacy Policy</span>
+            {t("terms.prefix")}{" "}
+            <span className="lp-terms-link">{t("terms.tos")}</span>{" "}
+            <span dangerouslySetInnerHTML={{ __html: t("terms.and") }} />{" "}
+            <span className="lp-terms-link">{t("terms.privacy")}</span>
           </p>
         </div>
 
