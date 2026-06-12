@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 export default function Footer() {
   const pathname = usePathname();
 
-  const isLoginPage = pathname === "/login";
+  const isLoginPage = pathname === "/account/login" || pathname === "/account/signup" ;
 
   return (
     <>

@@ -38,6 +38,13 @@ export default function PublicNav() {
           </TrueFocus>
         </li>
         <li>
+  <TrueFocus>
+    <a href="/account/signup" className="nav-signup-btn">
+      <BlurText text={t("signup")} delay={680} stepDelay={45} />
+    </a>
+  </TrueFocus>
+</li>
+        <li>
           <TrueFocus>
             <a href="/login">
               <BlurText text={t("signin")} delay={530} stepDelay={45} />

@@ -1,10 +1,11 @@
 import { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 import GitHubProvider from "next-auth/providers/github";
+import CredentialsProvider from "next-auth/providers/credentials";
+import bcrypt from "bcryptjs";
 import { prisma } from "./db";
 
 export const authOptions: NextAuthOptions = {
-  // NO adapter — we handle DB manually in callbacks
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -21,6 +22,42 @@ export const authOptions: NextAuthOptions = {
       clientId: process.env.GITHUB_CLIENT_ID!,
       clientSecret: process.env.GITHUB_CLIENT_SECRET!,
     }),
+    CredentialsProvider({
+      name: "credentials",
+      credentials: {
+        email: { label: "Email", type: "email" },
+        password: { label: "Password", type: "password" },
+      },
+      async authorize(credentials) {
+        if (!credentials?.email || !credentials?.password) {
+          throw new Error("Email and password required");
+        }
+
+        const user = await prisma.user.findUnique({
+          where: { email: credentials.email },
+        });
+
+        if (!user || !user.password) {
+          throw new Error("No account found with this email");
+        }
+
+        const isValid = await bcrypt.compare(
+          credentials.password,
+          user.password
+        );
+
+        if (!isValid) {
+          throw new Error("Incorrect password");
+        }
+
+        return {
+          id: user.id,
+          email: user.email,
+          name: user.name,
+          image: user.image,
+        };
+      },
+    }),
   ],
   session: {
     strategy: "jwt",
@@ -31,51 +68,39 @@ export const authOptions: NextAuthOptions = {
   },
   callbacks: {
     async jwt({ token, user, account, profile }) {
-      // Only runs on first sign in
       if (account && profile) {
         const email = token.email || (profile as any).email;
         const name = token.name || (profile as any).name;
-        const image = token.picture || (profile as any).picture || (profile as any).avatar_url;
+        const image =
+          token.picture ||
+          (profile as any).picture ||
+          (profile as any).avatar_url;
         const providerAccountId = account.providerAccountId;
         const provider = account.provider;
 
         if (!email) return token;
 
-        // Find existing account
         const existingAccount = await prisma.account.findUnique({
           where: {
-            provider_providerAccountId: {
-              provider,
-              providerAccountId,
-            },
+            provider_providerAccountId: { provider, providerAccountId },
           },
           include: { user: true },
         });
 
         if (existingAccount) {
-          // Account exists — use its user
           token.id = existingAccount.user.id;
           token.email = existingAccount.user.email!;
           token.name = existingAccount.user.name!;
           token.picture = existingAccount.user.image!;
         } else {
-          // New OAuth account — find or create user by email
-          let dbUser = await prisma.user.findUnique({
-            where: { email },
-          });
+          let dbUser = await prisma.user.findUnique({ where: { email } });
 
           if (!dbUser) {
-            // Completely new user
             dbUser = await prisma.user.create({
-              data: {
-                email,
-                name,
-                image,
-              },
+              data: { email, name, image },
             });
           }
 
-          // Link this OAuth account to the user
           await prisma.account.create({
             data: {
               userId: dbUser.id,
@@ -96,6 +121,13 @@ export const authOptions: NextAuthOptions = {
           token.name = dbUser.name!;
           token.picture = dbUser.image!;
         }
+      }
+
+      if (user) {
+        token.id = user.id;
+        token.email = user.email;
+        token.name = user.name;
+        token.picture = user.image;
       }
 
       return token;

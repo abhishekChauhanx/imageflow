@@ -1,0 +1,12 @@
+.nav-signup-btn {
+  background: var(--ink);
+  color: var(--cream) !important;
+  padding: 0.4rem 1.2rem;
+  border: 1px solid var(--ink);
+  transition: background 0.2s, color 0.2s;
+}
+.nav-signup-btn:hover {
+  background: var(--accent) !important;
+  color: var(--ink) !important;
+  border-color: var(--accent);
+}
