@@ -17,17 +17,15 @@ export async function proxy(request: NextRequest) {
     request.nextUrl.pathname.startsWith("/saved");
 
   if (isProtected && !token) {
-    return NextResponse.redirect(new URL("/login", request.url));
+    return NextResponse.redirect(new URL("/account/login", request.url)); // ← Only this changed
   }
 
   const response = NextResponse.next();
 
-  // Set default locale cookie if not already set
   const localeCookie = request.cookies.get("locale")?.value;
   if (!localeCookie || !locales.includes(localeCookie)) {
-    // Try to detect from browser Accept-Language header
     const acceptLang = request.headers.get("accept-language") ?? "";
-    const browserLang = acceptLang.split(",")[0].split("-")[0]; // e.g. "zh-CN" → "zh"
+    const browserLang = acceptLang.split(",")[0].split("-")[0];
     const detected = locales.includes(browserLang) ? browserLang : defaultLocale;
     response.cookies.set("locale", detected, { path: "/" });
   }

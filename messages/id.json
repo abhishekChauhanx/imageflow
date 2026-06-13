@@ -131,7 +131,8 @@
   "nav": {
     "how": "Cara kerja",
     "pricing": "Harga",
-    "signin": "Masuk"
+    "signin": "Masuk",
+       "signup":"Mendaftar"
   },
   "login": {
     "eyebrow": "Est. 2024 · Kecerdasan Visual",

@@ -131,7 +131,8 @@
   "nav": {
     "how": "이용 방법",
     "pricing": "요금제",
-    "signin": "로그인"
+    "signin": "로그인",
+       "signup":"가입"
   },
    "login": {
     "eyebrow": "설립 2024 · 비주얼 인텔리전스",

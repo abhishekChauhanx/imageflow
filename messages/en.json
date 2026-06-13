@@ -131,7 +131,8 @@
   "nav": {
     "how": "How it works",
     "pricing": "Pricing",
-    "signin": "Sign in"
+    "signin": "Sign in",
+    "signup":"Sign up"
   },
   "login": {
     "eyebrow": "Est. 2026 · Visual Intelligence",
