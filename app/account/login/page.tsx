@@ -9,6 +9,7 @@ import { toast } from "react-hot-toast";
 import Footer from "@/components/Footer/Footer";
 import LoginNav from "@/components/LoginNav/loginNav";
 import "../LoginPage.css";
+import OtpPopover from "@/components/OtpPopover/OtpPopover";
 
 /* ─────────────────────────────────────────────
    Golden particle canvas (unchanged)
@@ -16,7 +17,6 @@ import "../LoginPage.css";
 function GoldenCanvas({ dark }: { dark: boolean }) {
   const ref = useRef<HTMLCanvasElement>(null);
   const raf = useRef<number>(0);
-
   useEffect(() => {
     const canvas = ref.current!;
     const ctx = canvas.getContext("2d")!;
@@ -132,6 +132,7 @@ export default function LoginPage() {
   const router = useRouter();
   const mode = useAppSelector((s) => s.theme.mode);
   const dark = mode === "dark";
+const [showOtp, setShowOtp] = useState(false);
 
   const [hoverGH, setHoverGH]         = useState(false);
   const [hoverGG, setHoverGG]         = useState(false);
@@ -143,27 +144,55 @@ export default function LoginPage() {
   const [pwFocus, setPwFocus]         = useState(false);
   const [loading, setLoading]         = useState(false);
 
-  const handleLogin = async () => {
-    if (!email || !password) {
-      toast.error(`${t("email_label")} / ${t("password_label")} required`);
+ const handleLogin = async () => {
+  if (!email || !password) {
+    toast.error("Email and password required");
+    return;
+  }
+  setLoading(true);
+  try {
+    // First verify password
+    const res = await fetch("/api/auth/verify-password", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, password }),
+    });
+
+    if (!res.ok) {
+      const data = await res.json();
+      toast.error(data.error || "Invalid credentials");
       return;
     }
-    setLoading(true);
-    try {
-      const result = await signIn("credentials", { email, password, redirect: false });
-      if (result?.error) {
-        toast.error(result.error);
-      } else {
-        toast.success(t("title"));
-        router.push("/dashboard");
-      }
-    } catch {
-      toast.error("Something went wrong");
-    } finally {
-      setLoading(false);
-    }
-  };
 
+    // Send OTP
+    const otpRes = await fetch("/api/auth/send-otp", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email, type: "login" }),
+    });
+
+    if (otpRes.ok) {
+      setShowOtp(true);
+      toast.success("OTP sent to your email!");
+    } else {
+      toast.error("Failed to send OTP");
+    }
+  } catch {
+    toast.error("Something went wrong");
+  } finally {
+    setLoading(false);
+  }
+};
+
+const handleOtpSuccess = async () => {
+  setShowOtp(false);
+  await signIn("credentials", {
+    email,
+    password,
+    callbackUrl: "/dashboard",
+    redirect: true,
+  });
+};
   return (
     <div className={`lp${dark ? " lp--dark" : ""}`}>
       <GoldenCanvas dark={dark} />
@@ -394,6 +423,15 @@ export default function LoginPage() {
 
         <Footer />
       </main>
+
+      {showOtp && (
+  <OtpPopover
+    email={email}
+    type="login"
+    onSuccess={handleOtpSuccess}
+    onClose={() => setShowOtp(false)}
+  />
+)}
     </div>
   );
 }

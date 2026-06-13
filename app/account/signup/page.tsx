@@ -9,18 +9,18 @@ import LoginNav from "@/components/LoginNav/loginNav";
 import Footer from "@/components/Footer/Footer";
 import "../LoginPage.css";
 import { useTranslations } from "next-intl";
-
+import OtpPopover from "@/components/OtpPopover/OtpPopover";
 function EyeIcon({ open }: { open: boolean }) {
   return open ? (
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
-      <circle cx="12" cy="12" r="3"/>
+      <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z" />
+      <circle cx="12" cy="12" r="3" />
     </svg>
   ) : (
     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
-      <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
-      <line x1="1" y1="1" x2="23" y2="23"/>
+      <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94" />
+      <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19" />
+      <line x1="1" y1="1" x2="23" y2="23" />
     </svg>
   );
 }
@@ -48,50 +48,73 @@ export default function SignUpPage() {
 
   const t = useTranslations("signup");
 
+
+  const [showOtp, setShowOtp] = useState(false);
+  const [pendingData, setPendingData] = useState<{
+    name: string;
+    email: string;
+    password: string;
+  } | null>(null);
+
   const handleSignup = async () => {
     if (!name || !email || !password || !confirm) {
-      toast.error(t("toast.all_fields_required"));
+      toast.error("All fields are required");
       return;
     }
     if (password !== confirm) {
-      toast.error(t("toast.password_mismatch"));
+      toast.error("Passwords do not match");
       return;
     }
     if (password.length < 8) {
-      toast.error(t("toast.password_too_short"));
+      toast.error("Password must be at least 8 characters");
+      return;
+    }
+
+    // Check if email already exists
+    const checkRes = await fetch("/api/auth/check-email", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ email }),
+    });
+    const checkData = await checkRes.json();
+    if (checkData.exists) {
+      toast.error("Account already exists with this email");
       return;
     }
 
     setLoading(true);
     try {
-      const res = await fetch("/api/auth/signup", {
+      const res = await fetch("/api/auth/send-otp", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ email, type: "signup" }),
       });
 
-      const data = await res.json();
-
-      if (!res.ok) {
-        toast.error(data.error || t("toast.signup_failed"));
-        return;
+      if (res.ok) {
+        setPendingData({ name, email, password });
+        setShowOtp(true);
+        toast.success("OTP sent to your email!");
+      } else {
+        const data = await res.json();
+        toast.error(data.error || "Failed to send OTP");
       }
-
-      toast.success(t("toast.signup_success"));
-
-      await signIn("credentials", {
-        email,
-        password,
-        callbackUrl: "/dashboard",
-        redirect: true,
-      });
     } catch {
-      toast.error(t("toast.something_wrong"));
+      toast.error("Something went wrong");
     } finally {
       setLoading(false);
     }
   };
 
+  const handleOtpSuccess = async () => {
+    setShowOtp(false);
+    toast.success("Account created! Signing you in...");
+    await signIn("credentials", {
+      email: pendingData?.email,
+      password: pendingData?.password,
+      callbackUrl: "/dashboard",
+      redirect: true,
+    });
+  };
   return (
     <div className={`lp${dark ? " lp--dark" : ""}`}>
       <div className="lp-grain" />
@@ -126,7 +149,7 @@ export default function SignUpPage() {
             {[
               { num: "2.4B+", label: t("left.stats.images") },
               { num: "140ms", label: t("left.stats.latency") },
-              { num: "50+",   label: t("left.stats.sources") },
+              { num: "50+", label: t("left.stats.sources") },
             ].map((s, i) => (
               <div key={i} className="lp-left-stat">
                 <span className="lp-left-stat-num">{s.num}</span>
@@ -161,8 +184,8 @@ export default function SignUpPage() {
               <label className="lp-field-label" htmlFor="lp-name">{t("form.name_label")}</label>
               <div className="lp-field-wrap">
                 <svg className="lp-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
-                  <circle cx="12" cy="7" r="4"/>
+                  <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+                  <circle cx="12" cy="7" r="4" />
                 </svg>
                 <input
                   id="lp-name"
@@ -184,8 +207,8 @@ export default function SignUpPage() {
               <label className="lp-field-label" htmlFor="lp-email">{t("form.email_label")}</label>
               <div className="lp-field-wrap">
                 <svg className="lp-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="2" y="4" width="20" height="16" rx="2"/>
-                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/>
+                  <rect x="2" y="4" width="20" height="16" rx="2" />
+                  <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
                 </svg>
                 <input
                   id="lp-email"
@@ -207,8 +230,8 @@ export default function SignUpPage() {
               <label className="lp-field-label" htmlFor="lp-password">{t("form.password_label")}</label>
               <div className="lp-field-wrap">
                 <svg className="lp-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-                  <rect x="3" y="11" width="18" height="11" rx="2"/>
-                  <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                  <rect x="3" y="11" width="18" height="11" rx="2" />
+                  <path d="M7 11V7a5 5 0 0 1 10 0v4" />
                 </svg>
                 <input
                   id="lp-password"
@@ -233,7 +256,7 @@ export default function SignUpPage() {
               <label className="lp-field-label" htmlFor="lp-confirm">{t("form.confirm_label")}</label>
               <div className="lp-field-wrap">
                 <svg className="lp-field-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                 </svg>
                 <input
                   id="lp-confirm"
@@ -315,10 +338,10 @@ export default function SignUpPage() {
               <span className="lp-btn-bg" />
               <span className="lp-btn-content">
                 <svg className="lp-btn-icon" viewBox="0 0 24 24">
-                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
-                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
-                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
-                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                  <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                  <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                  <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                  <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
                 </svg>
                 <span className="lp-btn-label">{t("oauth.google")}</span>
                 <span className="lp-btn-arrow">→</span>
@@ -336,6 +359,16 @@ export default function SignUpPage() {
 
         <Footer />
       </main>
+
+      {showOtp && pendingData && (
+        <OtpPopover
+          email={pendingData.email}
+          type="signup"
+          signupData={{ name: pendingData.name, password: pendingData.password }}
+          onSuccess={handleOtpSuccess}
+          onClose={() => setShowOtp(false)}
+        />
+      )}
     </div>
   );
 }

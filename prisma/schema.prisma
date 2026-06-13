@@ -41,6 +41,17 @@ model Account {
   @@unique([provider, providerAccountId])
 }
 
+model OtpCode {
+  id        String   @id @default(cuid())
+  email     String
+  code      String
+  type      String   // "signup" or "login"
+  expiresAt DateTime
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now())
+
+  @@index([email])
+}
 model Session {
   id           String   @id @default(cuid())
   sessionToken String   @unique
