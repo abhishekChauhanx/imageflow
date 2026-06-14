@@ -34,6 +34,7 @@ export default function Home() {
   const tf  = useTranslations("home.features");
   const tp  = useTranslations("home.pricing");
   const tc  = useTranslations("home.cta_banner");
+const load = useTranslations("loading");
 
   const fallingLines = t.raw("hero.falling_lines") as string[];
   const statLabels   = t.raw("stats")              as { label: string }[];
@@ -80,7 +81,7 @@ export default function Home() {
         aria-label="Loading, please wait"
       >
         <IFLoader size={120} duration={2} />
-        <p className="if-overlay-text">Loading…</p>
+        <p className="if-overlay-text">{load("load")}</p>
       </div>
 
       {/* ══════════════════════════════════════════════

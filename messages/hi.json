@@ -217,5 +217,8 @@
       "signup_failed": "साइन अप विफल हुआ",
       "something_wrong": "कुछ गलत हो गया"
     }
+  },
+  "loading": {
+    "load": "लोड हो रहा है..."
   }
 }

@@ -219,5 +219,8 @@
       "signup_failed": "注册失败",
       "something_wrong": "出现了一些问题"
     }
+  },
+  "loading": {
+    "load": "加载中..."
   }
 }

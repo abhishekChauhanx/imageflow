@@ -217,5 +217,8 @@
       "signup_failed": "가입에 실패했습니다",
       "something_wrong": "문제가 발생했습니다"
     }
+  },
+  "loading": {
+    "load": "로딩 중..."
   }
 }

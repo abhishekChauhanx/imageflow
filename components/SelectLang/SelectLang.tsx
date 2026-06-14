@@ -15,6 +15,7 @@ const SelectLang = () => {
         { code: "zh", label: "🇨🇳 ZH" },
         { code: "id", label: "🇮🇩 ID" },
         { code: "ko", label: "🇰🇷 KO" },
+        { code: "ja", label: "🇰🇷 JA" },
     ];
     return (
         <li>

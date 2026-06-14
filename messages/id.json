@@ -217,5 +217,8 @@
       "signup_failed": "Pendaftaran gagal",
       "something_wrong": "Terjadi kesalahan"
     }
+  },
+  "loading": {
+    "load": "Memuat..."
   }
 }

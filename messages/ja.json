@@ -1,0 +1,224 @@
+{
+  "home": {
+    "hero": {
+      "eyebrow": "ビジュアル検索エンジン",
+      "description": "「海岸沿いの道にある赤いビンテージカー」「黄色いドレスを着て読書をする女性」など、見たものをそのまま言葉にするだけで、ImageFlowがウェブ上から探し出します。",
+      "cta_primary": "今すぐ始める",
+      "cta_secondary": "使い方を見る",
+      "search_label": "あなたの説明",
+      "search_query": "「夕暮れの古い灯台、オレンジ色の空」",
+      "floating_tag": "12件の一致が見つかりました",
+      "falling_lines": [
+        "言葉にする。",
+        "見つける。",
+        "どこでも。"
+      ]
+    },
+    "stats": [
+      {
+        "label": "登録画像数"
+      },
+      {
+        "label": "平均検索時間"
+      },
+      {
+        "label": "マッチ精度"
+      },
+      {
+        "label": "対応ソース数"
+      }
+    ],
+    "how_it_works": {
+      "eyebrow": "使い方",
+      "title": "画像を見つける3つのステップ",
+      "steps": [
+        {
+          "title": "説明する",
+          "body": "見たものを自然な言葉で書くだけ。キーワードやタグは不要です。"
+        },
+        {
+          "title": "検索する",
+          "body": "マルチモーダルモデルがあなたの言葉をビジュアル埋め込みに変換し、24億枚の画像を140ミリ秒以内にスキャンします。"
+        },
+        {
+          "title": "見つける",
+          "body": "ランク付けされた結果が、出典とライセンス情報とともに最も近いビジュアルマッチを表示します。"
+        }
+      ]
+    },
+    "features": {
+      "eyebrow": "機能",
+      "title": "クリエイターと\n開発者のために",
+      "body": "ImageFlowは両方の言語を話します。デザイナーや写真家向けのクリーンなUIと、ビジュアル検索を自社プロダクトに組み込みたいエンジニア向けの強力なREST APIを提供します。",
+      "list": [
+        {
+          "label": "自然言語クエリ",
+          "desc": "ブーリアン演算子やタグは不要。見たものをそのまま説明するだけ。"
+        },
+        {
+          "label": "REST & GraphQL API",
+          "desc": "JS、Python、Go向けSDKを備えた完全なプログラムアクセス。"
+        },
+        {
+          "label": "逆引き画像検索",
+          "desc": "画像をアップロードして、視覚的に類似した結果を即座に検索。"
+        },
+        {
+          "label": "バッチ処理",
+          "desc": "Webhookを介して数千件のクエリを非同期で実行。"
+        }
+      ],
+      "card": {
+        "query_label": "クエリ",
+        "query_text": "「秋の霧深い森の小道、黄金色の光」",
+        "tags": [
+          "自然",
+          "98.2%一致",
+          "ロイヤリティフリー"
+        ],
+        "api_calls_label": "本日のAPI呼び出し数",
+        "latency_label": "平均レイテンシ"
+      }
+    },
+    "pricing": {
+      "eyebrow": "料金プラン",
+      "title": "シンプルで透明な料金設定",
+      "badge": "人気プラン",
+      "plans": [
+        {
+          "name": "無料",
+          "unit": "/月",
+          "features": [
+            "月500回のクエリ",
+            "Web UIアクセス",
+            "コミュニティサポート",
+            "3つのソース"
+          ],
+          "cta": "今すぐ始める"
+        },
+        {
+          "name": "プロ",
+          "unit": "/月",
+          "features": [
+            "月50,000回のクエリ",
+            "REST & GraphQL API",
+            "優先サポート",
+            "50以上のソース",
+            "バッチ処理"
+          ],
+          "cta": "無料トライアルを開始"
+        },
+        {
+          "name": "エンタープライズ",
+          "unit": "+ カスタム /月",
+          "features": [
+            "無制限のクエリ",
+            "専用インフラ",
+            "SLA保証",
+            "カスタムソース",
+            "SSO / SAML"
+          ],
+          "cta": "お問い合わせ"
+        }
+      ]
+    },
+    "cta_banner": {
+      "eyebrow": "もっと賢く検索しませんか？",
+      "title": "無料で始めて、\n必要に応じてスケールアップ。",
+      "cta": "無料アカウントを作成"
+    }
+  },
+  "nav": {
+    "how": "使い方",
+    "pricing": "料金",
+    "signin": "サインイン",
+    "signup": "サインアップ"
+  },
+  "login": {
+    "eyebrow": "創業2026年・ビジュアルインテリジェンス",
+    "headline_1": "世界を",
+    "headline_em": "違う視点",
+    "headline_3": "で見る。",
+    "body": "24億枚の画像。たった一文。無限の可能性。",
+    "quote": "あなたが想像する画像は、すでに存在しています。私たちはそれを見つけるだけです。",
+    "stat_images": "登録画像数",
+    "stat_latency": "平均レイテンシ",
+    "stat_sources": "ソース数",
+    "watermark": "IMAGEFLOW",
+    "monogram": "IF",
+    "title": "おかえりなさい",
+    "subtitle": "あなたのアトリエにサインイン",
+    "email_label": "メールアドレス",
+    "email_placeholder": "you@example.com",
+    "password_label": "パスワード",
+    "password_placeholder": "••••••••",
+    "forgot": "パスワードをお忘れですか？",
+    "sign_in": "サインイン",
+    "new_here": "初めての方ですか？",
+    "create_account": "アカウントを作成",
+    "or_continue": "または以下で続行",
+    "github": "GitHubで続行",
+    "google": "Googleで続行",
+    "terms_prefix": "サインインすることで、以下に同意したものとみなされます：",
+    "terms": "利用規約",
+    "privacy": "プライバシーポリシー",
+    "show_password": "パスワードを表示",
+    "hide_password": "パスワードを隠す"
+  },
+  "signup": {
+    "left": {
+      "eyebrow": "創業2024年・ビジュアルインテリジェンス",
+      "headline_line1": "今すぐ",
+      "headline_em": "アトリエ",
+      "headline_line2": "に参加。",
+      "body_line1": "24億枚の画像。",
+      "body_line2": "たった一文。無限の可能性。",
+      "quote": "すべての検索は、たった一つの文章から始まります。",
+      "stats": {
+        "images": "登録画像数",
+        "latency": "平均レイテンシ",
+        "sources": "ソース数"
+      }
+    },
+    "card": {
+      "title": "アカウント作成",
+      "subtitle": "あなたのアトリエに参加"
+    },
+    "form": {
+      "name_label": "氏名",
+      "name_placeholder": "山田 太郎",
+      "email_label": "メールアドレス",
+      "email_placeholder": "you@example.com",
+      "password_label": "パスワード",
+      "password_placeholder": "8文字以上",
+      "confirm_label": "パスワード（確認）",
+      "confirm_placeholder": "パスワードを再入力",
+      "submit": "アカウントを作成",
+      "submitting": "アカウントを作成中...",
+      "have_account": "すでにアカウントをお持ちですか？",
+      "sign_in": "サインイン"
+    },
+    "divider": "または以下で続行",
+    "oauth": {
+      "github": "GitHubで続行",
+      "google": "Googleで続行"
+    },
+    "terms": {
+      "prefix": "サインアップすることで、以下に同意したものとみなされます：",
+      "tos": "利用規約",
+      "and": "および",
+      "privacy": "プライバシーポリシー"
+    },
+    "toast": {
+      "all_fields_required": "すべての項目を入力してください",
+      "password_mismatch": "パスワードが一致しません",
+      "password_too_short": "パスワードは8文字以上で入力してください",
+      "signup_success": "アカウントが作成されました！サインイン中...",
+      "signup_failed": "サインアップに失敗しました",
+      "something_wrong": "問題が発生しました"
+    }
+  },
+  "loading": {
+    "load": "読み込み中..."
+  }
+}
