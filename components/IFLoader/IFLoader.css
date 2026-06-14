@@ -1,0 +1,89 @@
+.if-loader-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.if-loader-svg {
+  display: block;
+}
+
+/* Animated inner border */
+.if-border-animated {
+  fill: none;
+  stroke: #C8A96E;
+  stroke-width: 0.8;
+  stroke-linecap: square;
+  animation: draw-border var(--if-duration, 3s) linear infinite;
+}
+
+@keyframes draw-border {
+  from {
+    stroke-dashoffset: var(--if-perimeter, 656);
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+/* Corner dots */
+.if-dot-bl {
+  fill: #C8A96E;
+  animation: pulse-in var(--if-duration, 3s) ease-in-out infinite;
+}
+
+.if-dot-br {
+  fill: #C8A96E;
+  animation: pulse-out var(--if-duration, 3s) ease-in-out infinite;
+}
+
+@keyframes pulse-in {
+  0%, 100% { opacity: 0.4; }
+  50%       { opacity: 1; }
+}
+
+@keyframes pulse-out {
+  0%, 100% { opacity: 1; }
+  50%       { opacity: 0.4; }
+}
+
+/* Outer border */
+.if-border-outer {
+  fill: none;
+  stroke: #C8A96E;
+  stroke-width: 0.8;
+  opacity: 0.4;
+}
+
+/* Inner static dim border */
+.if-border-inner {
+  fill: none;
+  stroke: #C8A96E;
+  stroke-width: 0.8;
+  opacity: 0.25;
+}
+
+/* Label text */
+.if-label {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  fill: #C8A96E;
+  dominant-baseline: middle;
+  text-anchor: middle;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .if-border-animated,
+  .if-dot-bl,
+  .if-dot-br {
+    animation: none;
+  }
+  .if-border-animated {
+    stroke-dashoffset: 0;
+  }
+  .if-dot-bl,
+  .if-dot-br {
+    opacity: 1;
+  }
+}
