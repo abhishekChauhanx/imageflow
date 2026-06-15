@@ -9,7 +9,9 @@ import { useAppDispatch, useAppSelector } from "@/store/hooks";
 import { toggleTheme } from "@/store/themeSlice";
 import "./DashboardPage.css";
 import DashNav from "@/components/DashNav/DashNav";
-
+import IFLoader from "@/components/IFLoader/IFLoader";
+import { showLoader, hideLoader } from "@/store/loaderSlice";
+import { useCallback } from "react";
 interface ImageResult {
   imageUrl: string;
   sourceUrl: string;
@@ -40,7 +42,18 @@ export default function DashboardPage() {
   const [searched, setSearched] = useState(false);
   const [savedImages, setSavedImages] = useState<string[]>([]);
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
+  const visible = useAppSelector((s) => s.loader.visible);
 
+  const handleNav = useCallback(
+    (href: string) => {
+      dispatch(showLoader());
+      setTimeout(() => {
+        router.push(href);
+        setTimeout(() => dispatch(hideLoader()), 3000);
+      }, 400);
+    },
+    [dispatch, router]
+  );
   useEffect(() => {
     const hasShown = sessionStorage.getItem("welcomeShown");
     if (!hasShown && session?.user) {
@@ -102,6 +115,7 @@ export default function DashboardPage() {
 
   const handleLogout = () => {
     sessionStorage.removeItem("welcomeShown");
+    dispatch(showLoader());
     signOut({ callbackUrl: "/", redirect: true });
   };
 
@@ -128,213 +142,225 @@ export default function DashboardPage() {
   }
 
   return (
-    <div className={`dash-page${dark ? " dash--dark" : ""}`}>
 
-      {/* ── GRAIN ── */}
-      <div className="dash-grain" />
+    <>
+      <div
+        className={`if-overlay${visible ? " if-overlay--visible" : ""}`}
+        aria-hidden={!visible}
+        role="status"
+      >
+        <IFLoader size={120} duration={2} />
+        <p className="if-overlay-text">Loading…</p>
+      </div>
+      <div className={`dash-page${dark ? " dash--dark" : ""}`}>
 
-      {/* ── NAV ── */}
-     <DashNav/>
+        {/* ── GRAIN ── */}
+        <div className="dash-grain" />
 
-      {/* ── MAIN ── */}
-      <main className="dash-main">
+        {/* ── NAV ── */}
+        <DashNav />
 
-        {/* ── SEARCH HERO ── */}
-        <section className="dash-hero">
-          <p className="dash-eyebrow">
-            <span className="dash-eyebrow-line" />
-            Visual Search Engine
-          </p>
-          <h1 className="dash-hero-title">Find Any Image</h1>
-          <p className="dash-hero-sub">
-            Describe what you see in plain language — and ImageFlow surfaces it
-            from across the web in under 140ms.
-          </p>
+        {/* ── MAIN ── */}
+        <main className="dash-main">
 
-          <div className="dash-search-row">
-            <input
-              type="text"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              onKeyDown={handleKeyDown}
-              placeholder="a snowy mountain at golden hour..."
-              disabled={loading}
-              className="dash-input"
-            />
-            <button
-              onClick={handleSearch}
-              disabled={loading}
-              className="dash-search-btn"
-            >
-              {loading ? (
-                <><span className="dash-btn-spinner" /> Searching…</>
-              ) : (
-                "Find Images"
-              )}
-            </button>
-          </div>
+          {/* ── SEARCH HERO ── */}
+          <section className="dash-hero">
+            <p className="dash-eyebrow">
+              <span className="dash-eyebrow-line" />
+              Visual Search Engine
+            </p>
+            <h1 className="dash-hero-title">Find Any Image</h1>
+            <p className="dash-hero-sub">
+              Describe what you see in plain language — and ImageFlow surfaces it
+              from across the web in under 140ms.
+            </p>
 
-          {/* suggestion chips */}
-          <div className="dash-chips">
-            {SUGGESTION_TAGS.map((tag) => (
+            <div className="dash-search-row">
+              <input
+                type="text"
+                value={description}
+                onChange={(e) => setDescription(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder="a snowy mountain at golden hour..."
+                disabled={loading}
+                className="dash-input"
+              />
               <button
-                key={tag}
-                className="dash-chip"
-                onClick={() => setDescription(tag)}
+                onClick={handleSearch}
+                disabled={loading}
+                className="dash-search-btn"
               >
-                {tag}
+                {loading ? (
+                  <><span className="dash-btn-spinner" /> Searching…</>
+                ) : (
+                  "Find Images"
+                )}
               </button>
-            ))}
-          </div>
-        </section>
-
-        {/* ── LOADING STATE ── */}
-        {loading && (
-          <div className="dash-state-box">
-            <div className="dash-spinner dash-spinner-lg" />
-            <p className="dash-state-title">Searching across 8 sources…</p>
-            <p className="dash-state-sub">This may take 20–40 seconds</p>
-          </div>
-        )}
-
-        {/* ── EMPTY STATE ── */}
-        {!loading && !searched && (
-          <div className="dash-state-box">
-            <div className="dash-empty-icon">✦</div>
-            <p className="dash-state-title">Type a description above and click Find Images</p>
-            <div className="dash-stats-mini">
-              {[
-                { num: "2.4B+", label: "Images indexed" },
-                { num: "140ms", label: "Avg. response" },
-                { num: "98%",   label: "Match accuracy" },
-                { num: "50+",   label: "Sources" },
-              ].map((s, i) => (
-                <div key={i} className="dash-stat-mini">
-                  <span className="dash-stat-mini-num">{s.num}</span>
-                  <span className="dash-stat-mini-label">{s.label}</span>
-                </div>
-              ))}
             </div>
-          </div>
-        )}
 
-        {/* ── NO RESULTS ── */}
-        {!loading && searched && results.length === 0 && (
-          <div className="dash-state-box">
-            <div className="dash-empty-icon" style={{ opacity: 0.3 }}>✦</div>
-            <p className="dash-state-title">No results found</p>
-            <p className="dash-state-sub">Try a different description</p>
-          </div>
-        )}
-
-        {/* ── RESULTS ── */}
-        {!loading && results.length > 0 && (
-          <section className="dash-results">
-
-            {/* results header */}
-            <div className="dash-results-header">
-              <div className="dash-results-meta">
-                <h2 className="dash-results-count">
-                  <span className="dash-results-num">{filteredResults.length}</span>
-                  {activeFilter ? ` from ${activeFilter}` : " images found"}
-                </h2>
-                <p className="dash-results-query">"{description}"</p>
-              </div>
-
-              <div className="dash-filters">
+            {/* suggestion chips */}
+            <div className="dash-chips">
+              {SUGGESTION_TAGS.map((tag) => (
                 <button
-                  className={`dash-filter${!activeFilter ? " dash-filter-active" : ""}`}
-                  onClick={() => setActiveFilter(null)}
+                  key={tag}
+                  className="dash-chip"
+                  onClick={() => setDescription(tag)}
                 >
-                  All ({results.length})
+                  {tag}
                 </button>
-                {uniqueSites.map((site) => (
-                  <button
-                    key={site}
-                    className={`dash-filter${activeFilter === site ? " dash-filter-active" : ""}`}
-                    onClick={() => setActiveFilter(activeFilter === site ? null : site)}
-                  >
-                    {site} ({results.filter((r) => r.sourceSite === site).length})
-                  </button>
-                ))}
-              </div>
-            </div>
-
-            {/* grid */}
-            <div className="dash-grid">
-              {filteredResults.map((image, index) => (
-                <div
-                  key={index}
-                  className="dash-card"
-                  style={{ animationDelay: `${index * 0.04}s` }}
-                >
-                  <div className="dash-card-img-wrap">
-                    <img
-                      src={image.imageUrl}
-                      alt={image.title}
-                      className="dash-card-img"
-                      onError={(e) => {
-                        (e.target as HTMLImageElement).src =
-                          "https://placehold.co/400x225?text=Not+Available";
-                      }}
-                    />
-                    <div className="dash-card-overlay">
-                      <span className="dash-card-site">{image.sourceSite}</span>
-                    </div>
-                  </div>
-
-                  <div className="dash-card-body">
-                    <p className="dash-card-title">{image.title}</p>
-                    <div className="dash-card-actions">
-                      <a
-                        href={image.sourceUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="dash-card-btn dash-card-btn-view"
-                      >
-                        View →
-                      </a>
-                      <button
-                        onClick={() => handleSave(image)}
-                        disabled={savedImages.includes(image.imageUrl)}
-                        className={`dash-card-btn${
-                          savedImages.includes(image.imageUrl)
-                            ? " dash-card-btn-saved"
-                            : " dash-card-btn-save"
-                        }`}
-                      >
-                        {savedImages.includes(image.imageUrl) ? "Saved ✓" : "Save"}
-                      </button>
-                    </div>
-                  </div>
-                </div>
               ))}
             </div>
           </section>
-        )}
-      </main>
 
-      {/* ── FOOTER ── */}
-      <footer className="dash-footer">
-        <span className="dash-footer-copy">
-          © 2026 <span className="dash-footer-accent">@zoker2026</span>
-        </span>
-        <div className="dash-footer-links">
-          {[
-            { label: "History", path: "/history" },
-            { label: "Saved", path: "/saved" },
-            { label: "Home", path: "/" },
-          ].map((l) => (
-            <button
-              key={l.label}
-              className="dash-footer-link"
-              onClick={() => router.push(l.path)}
-            >
-              {l.label}
-            </button>
-          ))}
-        </div>
-      </footer>
-    </div>
+          {/* ── LOADING STATE ── */}
+          {loading && (
+            <div className="dash-state-box">
+              <div className="dash-spinner dash-spinner-lg" />
+              <p className="dash-state-title">Searching across 8 sources…</p>
+              <p className="dash-state-sub">This may take 20–40 seconds</p>
+            </div>
+          )}
+
+          {/* ── EMPTY STATE ── */}
+          {!loading && !searched && (
+            <div className="dash-state-box">
+              <div className="dash-empty-icon">✦</div>
+              <p className="dash-state-title">Type a description above and click Find Images</p>
+              <div className="dash-stats-mini">
+                {[
+                  { num: "2.4B+", label: "Images indexed" },
+                  { num: "140ms", label: "Avg. response" },
+                  { num: "98%", label: "Match accuracy" },
+                  { num: "50+", label: "Sources" },
+                ].map((s, i) => (
+                  <div key={i} className="dash-stat-mini">
+                    <span className="dash-stat-mini-num">{s.num}</span>
+                    <span className="dash-stat-mini-label">{s.label}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          {/* ── NO RESULTS ── */}
+          {!loading && searched && results.length === 0 && (
+            <div className="dash-state-box">
+              <div className="dash-empty-icon" style={{ opacity: 0.3 }}>✦</div>
+              <p className="dash-state-title">No results found</p>
+              <p className="dash-state-sub">Try a different description</p>
+            </div>
+          )}
+
+          {/* ── RESULTS ── */}
+          {!loading && results.length > 0 && (
+            <section className="dash-results">
+
+              {/* results header */}
+              <div className="dash-results-header">
+                <div className="dash-results-meta">
+                  <h2 className="dash-results-count">
+                    <span className="dash-results-num">{filteredResults.length}</span>
+                    {activeFilter ? ` from ${activeFilter}` : " images found"}
+                  </h2>
+                  <p className="dash-results-query">"{description}"</p>
+                </div>
+
+                <div className="dash-filters">
+                  <button
+                    className={`dash-filter${!activeFilter ? " dash-filter-active" : ""}`}
+                    onClick={() => setActiveFilter(null)}
+                  >
+                    All ({results.length})
+                  </button>
+                  {uniqueSites.map((site) => (
+                    <button
+                      key={site}
+                      className={`dash-filter${activeFilter === site ? " dash-filter-active" : ""}`}
+                      onClick={() => setActiveFilter(activeFilter === site ? null : site)}
+                    >
+                      {site} ({results.filter((r) => r.sourceSite === site).length})
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              {/* grid */}
+              <div className="dash-grid">
+                {filteredResults.map((image, index) => (
+                  <div
+                    key={index}
+                    className="dash-card"
+                    style={{ animationDelay: `${index * 0.04}s` }}
+                  >
+                    <div className="dash-card-img-wrap">
+                      <img
+                        src={image.imageUrl}
+                        alt={image.title}
+                        className="dash-card-img"
+                        onError={(e) => {
+                          (e.target as HTMLImageElement).src =
+                            "https://placehold.co/400x225?text=Not+Available";
+                        }}
+                      />
+                      <div className="dash-card-overlay">
+                        <span className="dash-card-site">{image.sourceSite}</span>
+                      </div>
+                    </div>
+
+                    <div className="dash-card-body">
+                      <p className="dash-card-title">{image.title}</p>
+                      <div className="dash-card-actions">
+                        <a
+                          href={image.sourceUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="dash-card-btn dash-card-btn-view"
+                        >
+                          View →
+                        </a>
+                        <button
+                          onClick={() => handleSave(image)}
+                          disabled={savedImages.includes(image.imageUrl)}
+                          className={`dash-card-btn${savedImages.includes(image.imageUrl)
+                              ? " dash-card-btn-saved"
+                              : " dash-card-btn-save"
+                            }`}
+                        >
+                          {savedImages.includes(image.imageUrl) ? "Saved ✓" : "Save"}
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+          )}
+        </main>
+
+        {/* ── FOOTER ── */}
+        <footer className="dash-footer">
+          <span className="dash-footer-copy">
+            © 2026 <span className="dash-footer-accent">@zoker2026</span>
+          </span>
+          <div className="dash-footer-links">
+            {[
+              { label: "History", path: "/history" },
+              { label: "Saved", path: "/saved" },
+              { label: "Home", path: "/" },
+            ].map((l) => (
+              <button
+                key={l.label}
+                className="dash-footer-link"
+                onClick={() => handleNav(l.path)}
+              >
+                {l.label}
+              </button>
+            ))}
+          </div>
+        </footer>
+      </div>
+    </>
+
+
   );
 }

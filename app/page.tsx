@@ -47,15 +47,6 @@ const load = useTranslations("loading");
 
   const planPrices = [0, 29, 99];
   const planAccent = [false, true, false];
-
-  /* ─────────────────────────────────────────────
-     handleNav
-     ① dispatch(showLoader)  → Redux sets visible=true
-                               → overlay fades in via CSS transition
-     ② wait 400ms            → user sees the IF loader animate
-     ③ router.push(href)     → Next.js starts navigation
-     ④ 3s safety hideLoader  → clears overlay if new page is slow
-  ───────────────────────────────────────────── */
   const handleNav = useCallback(
     (href: string) => {
       dispatch(showLoader());
@@ -69,11 +60,7 @@ const load = useTranslations("loading");
 
   return (
     <>
-      {/* ══════════════════════════════════════════════
-          FULL-SCREEN IF LOADER OVERLAY
-          — uses IFLoader component directly
-          — visibility driven by Redux state.loader.visible
-      ══════════════════════════════════════════════ */}
+   
       <div
         className={`if-overlay${visible ? " if-overlay--visible" : ""}`}
         aria-hidden={!visible}
