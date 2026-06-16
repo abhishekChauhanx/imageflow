@@ -12,6 +12,8 @@ import DashNav from "@/components/DashNav/DashNav";
 import IFLoader from "@/components/IFLoader/IFLoader";
 import { showLoader, hideLoader } from "@/store/loaderSlice";
 import { useCallback } from "react";
+import { useTranslations } from "next-intl";
+
 interface ImageResult {
   imageUrl: string;
   sourceUrl: string;
@@ -19,22 +21,13 @@ interface ImageResult {
   title: string;
 }
 
-const SUGGESTION_TAGS = [
-  "sunset mountains",
-  "anime girl",
-  "futuristic city",
-  "cute cat",
-  "abstract art",
-  "old lighthouse dusk",
-  "misty forest autumn",
-];
-
 export default function DashboardPage() {
   const { data: session, status } = useSession();
   const router = useRouter();
   const dispatch = useAppDispatch();
   const mode = useAppSelector((state) => state.theme.mode);
   const dark = mode === "dark";
+  const t = useTranslations("dashboard");
 
   const [description, setDescription] = useState("");
   const [results, setResults] = useState<ImageResult[]>([]);
@@ -43,6 +36,9 @@ export default function DashboardPage() {
   const [savedImages, setSavedImages] = useState<string[]>([]);
   const [activeFilter, setActiveFilter] = useState<string | null>(null);
   const visible = useAppSelector((s) => s.loader.visible);
+
+  // suggestion_tags is an array in JSON — pull it as a raw value
+  const SUGGESTION_TAGS = t.raw("suggestion_tags") as string[];
 
   const handleNav = useCallback(
     (href: string) => {
@@ -54,6 +50,7 @@ export default function DashboardPage() {
     },
     [dispatch, router]
   );
+
   useEffect(() => {
     const hasShown = sessionStorage.getItem("welcomeShown");
     if (!hasShown && session?.user) {
@@ -67,7 +64,7 @@ export default function DashboardPage() {
 
   const handleSearch = async () => {
     if (!description.trim()) {
-      toast.error("Please enter a description");
+      toast.error(t("toast.empty_description"));
       return;
     }
     setLoading(true);
@@ -82,13 +79,13 @@ export default function DashboardPage() {
       });
       const data = await response.json();
       if (!response.ok) {
-        toast.error(data.error || "Search failed");
+        toast.error(data.error || t("toast.search_failed"));
         return;
       }
       setResults(data.results);
       toast.success(`Found ${data.totalResults} images!`);
     } catch {
-      toast.error("Something went wrong. Please try again.");
+      toast.error(t("toast.search_error"));
     } finally {
       setLoading(false);
     }
@@ -103,13 +100,17 @@ export default function DashboardPage() {
       });
       if (response.ok) {
         setSavedImages((prev) => [...prev, image.imageUrl]);
-        toast.success("Image saved!");
+        toast.success(t("toast.image_saved"));
       } else {
         const data = await response.json();
-        toast.error(data.error === "Image already saved" ? "Already saved!" : "Failed to save image");
+        toast.error(
+          data.error === "Image already saved"
+            ? t("toast.already_saved")
+            : t("toast.save_failed")
+        );
       }
     } catch {
-      toast.error("Failed to save image");
+      toast.error(t("toast.save_failed"));
     }
   };
 
@@ -141,8 +142,13 @@ export default function DashboardPage() {
     );
   }
 
-  return (
+  // stats_mini is an array in JSON
+  const statsMini = t.raw("stats_mini") as { num: string; label: string }[];
 
+  // footer links is an array in JSON
+  const footerLinks = t.raw("footer.links") as { label: string; path: string }[];
+
+  return (
     <>
       <div
         className={`if-overlay${visible ? " if-overlay--visible" : ""}`}
@@ -150,8 +156,9 @@ export default function DashboardPage() {
         role="status"
       >
         <IFLoader size={120} duration={2} />
-        <p className="if-overlay-text">Loading…</p>
+        <p className="if-overlay-text">{t("overlay.loading")}</p>
       </div>
+
       <div className={`dash-page${dark ? " dash--dark" : ""}`}>
 
         {/* ── GRAIN ── */}
@@ -167,13 +174,10 @@ export default function DashboardPage() {
           <section className="dash-hero">
             <p className="dash-eyebrow">
               <span className="dash-eyebrow-line" />
-              Visual Search Engine
+              {t("hero.eyebrow")}
             </p>
-            <h1 className="dash-hero-title">Find Any Image</h1>
-            <p className="dash-hero-sub">
-              Describe what you see in plain language — and ImageFlow surfaces it
-              from across the web in under 140ms.
-            </p>
+            <h1 className="dash-hero-title">{t("hero.title")}</h1>
+            <p className="dash-hero-sub">{t("hero.subtitle")}</p>
 
             <div className="dash-search-row">
               <input
@@ -181,7 +185,7 @@ export default function DashboardPage() {
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="a snowy mountain at golden hour..."
+                placeholder={t("hero.input_placeholder")}
                 disabled={loading}
                 className="dash-input"
               />
@@ -191,9 +195,9 @@ export default function DashboardPage() {
                 className="dash-search-btn"
               >
                 {loading ? (
-                  <><span className="dash-btn-spinner" /> Searching…</>
+                  <><span className="dash-btn-spinner" /> {t("hero.search_btn_loading")}</>
                 ) : (
-                  "Find Images"
+                  t("hero.search_btn")
                 )}
               </button>
             </div>
@@ -216,23 +220,18 @@ export default function DashboardPage() {
           {loading && (
             <div className="dash-state-box">
               <div className="dash-spinner dash-spinner-lg" />
-              <p className="dash-state-title">Searching across 8 sources…</p>
-              <p className="dash-state-sub">This may take 20–40 seconds</p>
+              <p className="dash-state-title">{t("loading_state.title")}</p>
+              <p className="dash-state-sub">{t("loading_state.subtitle")}</p>
             </div>
           )}
 
           {/* ── EMPTY STATE ── */}
           {!loading && !searched && (
             <div className="dash-state-box">
-              <div className="dash-empty-icon">✦</div>
-              <p className="dash-state-title">Type a description above and click Find Images</p>
+              <div className="dash-empty-icon">{t("empty_state.icon")}</div>
+              <p className="dash-state-title">{t("empty_state.title")}</p>
               <div className="dash-stats-mini">
-                {[
-                  { num: "2.4B+", label: "Images indexed" },
-                  { num: "140ms", label: "Avg. response" },
-                  { num: "98%", label: "Match accuracy" },
-                  { num: "50+", label: "Sources" },
-                ].map((s, i) => (
+                {statsMini.map((s, i) => (
                   <div key={i} className="dash-stat-mini">
                     <span className="dash-stat-mini-num">{s.num}</span>
                     <span className="dash-stat-mini-label">{s.label}</span>
@@ -245,9 +244,11 @@ export default function DashboardPage() {
           {/* ── NO RESULTS ── */}
           {!loading && searched && results.length === 0 && (
             <div className="dash-state-box">
-              <div className="dash-empty-icon" style={{ opacity: 0.3 }}>✦</div>
-              <p className="dash-state-title">No results found</p>
-              <p className="dash-state-sub">Try a different description</p>
+              <div className="dash-empty-icon" style={{ opacity: 0.3 }}>
+                {t("empty_state.icon")}
+              </div>
+              <p className="dash-state-title">{t("no_results.title")}</p>
+              <p className="dash-state-sub">{t("no_results.subtitle")}</p>
             </div>
           )}
 
@@ -260,7 +261,9 @@ export default function DashboardPage() {
                 <div className="dash-results-meta">
                   <h2 className="dash-results-count">
                     <span className="dash-results-num">{filteredResults.length}</span>
-                    {activeFilter ? ` from ${activeFilter}` : " images found"}
+                    {activeFilter
+                      ? ` ${t("results.suffix_filtered")} ${activeFilter}`
+                      : ` ${t("results.suffix_all")}`}
                   </h2>
                   <p className="dash-results-query">"{description}"</p>
                 </div>
@@ -270,7 +273,7 @@ export default function DashboardPage() {
                     className={`dash-filter${!activeFilter ? " dash-filter-active" : ""}`}
                     onClick={() => setActiveFilter(null)}
                   >
-                    All ({results.length})
+                    {t("results.filter_all")} ({results.length})
                   </button>
                   {uniqueSites.map((site) => (
                     <button
@@ -316,17 +319,20 @@ export default function DashboardPage() {
                           rel="noopener noreferrer"
                           className="dash-card-btn dash-card-btn-view"
                         >
-                          View →
+                          {t("results.card.view_btn")}
                         </a>
                         <button
                           onClick={() => handleSave(image)}
                           disabled={savedImages.includes(image.imageUrl)}
-                          className={`dash-card-btn${savedImages.includes(image.imageUrl)
+                          className={`dash-card-btn${
+                            savedImages.includes(image.imageUrl)
                               ? " dash-card-btn-saved"
                               : " dash-card-btn-save"
-                            }`}
+                          }`}
                         >
-                          {savedImages.includes(image.imageUrl) ? "Saved ✓" : "Save"}
+                          {savedImages.includes(image.imageUrl)
+                            ? t("results.card.saved_btn")
+                            : t("results.card.save_btn")}
                         </button>
                       </div>
                     </div>
@@ -340,14 +346,10 @@ export default function DashboardPage() {
         {/* ── FOOTER ── */}
         <footer className="dash-footer">
           <span className="dash-footer-copy">
-            © 2026 <span className="dash-footer-accent">@zoker2026</span>
+            {t("footer.copy")} <span className="dash-footer-accent">{t("footer.accent")}</span>
           </span>
           <div className="dash-footer-links">
-            {[
-              { label: "History", path: "/history" },
-              { label: "Saved", path: "/saved" },
-              { label: "Home", path: "/" },
-            ].map((l) => (
+            {footerLinks.map((l) => (
               <button
                 key={l.label}
                 className="dash-footer-link"
@@ -360,7 +362,5 @@ export default function DashboardPage() {
         </footer>
       </div>
     </>
-
-
   );
 }

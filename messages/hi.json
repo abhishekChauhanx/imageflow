@@ -220,5 +220,158 @@
   },
   "loading": {
     "load": "लोड हो रहा है..."
+  },
+  "dashboard": {
+    "overlay": {
+      "loading": "लोड हो रहा है…"
+    },
+    "hero": {
+      "eyebrow": "विज़ुअल सर्च इंजन",
+      "title": "कोई भी छवि खोजें",
+      "subtitle": "जो आप देखते हैं उसे साधारण भाषा में वर्णित करें — और ImageFlow उसे 140ms से कम समय में पूरे वेब से ढूंढकर दिखाता है।",
+      "input_placeholder": "सुनहरे समय में बर्फ़ से ढका पहाड़...",
+      "search_btn": "छवियाँ खोजें",
+      "search_btn_loading": "खोजा जा रहा है…"
+    },
+    "suggestion_tags": [
+      "सूर्यास्त के पहाड़",
+      "एनीमे लड़की",
+      "भविष्यवादी शहर",
+      "प्यारी बिल्ली",
+      "अमूर्त कला",
+      "सांझ का पुराना प्रकाशस्तंभ",
+      "धुंधला शरदकालीन जंगल"
+    ],
+    "loading_state": {
+      "title": "8 स्रोतों में खोज की जा रही है…",
+      "subtitle": "इसमें 20–40 सेकंड लग सकते हैं"
+    },
+    "empty_state": {
+      "icon": "✦",
+      "title": "ऊपर विवरण लिखें और 'छवियाँ खोजें' पर क्लिक करें"
+    },
+    "stats_mini": [
+      { "num": "2.4B+", "label": "अनुक्रमित छवियाँ" },
+      { "num": "140ms", "label": "औसत प्रतिक्रिया" },
+      { "num": "98%", "label": "मिलान सटीकता" },
+      { "num": "50+", "label": "स्रोत" }
+    ],
+    "no_results": {
+      "title": "कोई परिणाम नहीं मिला",
+      "subtitle": "कोई दूसरा विवरण आज़माएँ"
+    },
+    "results": {
+      "suffix_filtered": "से",
+      "suffix_all": "छवियाँ मिलीं",
+      "filter_all": "सभी",
+      "card": {
+        "view_btn": "देखें →",
+        "save_btn": "सहेजें",
+        "saved_btn": "सहेजा गया ✓"
+      }
+    },
+    "toast": {
+      "empty_description": "कृपया एक विवरण दर्ज करें",
+      "search_failed": "खोज विफल रही",
+      "search_error": "कुछ गलत हो गया। कृपया पुनः प्रयास करें।",
+      "image_saved": "छवि सहेजी गई!",
+      "already_saved": "पहले से सहेजी गई है!",
+      "save_failed": "छवि सहेजने में विफल"
+    },
+    "footer": {
+      "copy": "© 2026",
+      "accent": "@zoker2026",
+      "links": [
+        { "label": "इतिहास", "path": "/history" },
+        { "label": "सहेजी गई", "path": "/saved" },
+        { "label": "मुख्य पृष्ठ", "path": "/" }
+      ]
+    }
+  },
+  
+  "history": {
+    "header": {
+      "eyebrow": "आपकी गतिविधि",
+      "title": "खोज इतिहास",
+      "subtitle": "{count} खोजें सहेजी गईं",
+      "clear_btn": "सभी साफ़ करें"
+    },
+    "loading_state": {
+      "title": "इतिहास लोड हो रहा है…"
+    },
+    "empty_state": {
+      "icon": "✦",
+      "title": "अभी तक कोई खोज नहीं",
+      "subtitle": "अपना इतिहास यहाँ देखने के लिए खोज शुरू करें",
+      "cta_btn": "खोज पर जाएँ"
+    },
+    "card": {
+      "arrow": "→",
+      "meta": "{count} परिणाम · {date}"
+    },
+    "toast": {
+      "history_cleared": "इतिहास साफ़ कर दिया गया!"
+    },
+    "footer": {
+      "copy": "© 2026",
+      "accent": "@zoker2026",
+      "links": [
+        { "label": "खोज", "path": "/dashboard" },
+        { "label": "सहेजी गई", "path": "/saved" },
+        { "label": "मुख्य पृष्ठ", "path": "/" }
+      ]
+    }
+  },
+  "saved": {
+    "header": {
+      "eyebrow": "आपका संग्रह",
+      "title": "सहेजी गई छवियाँ",
+      "subtitle": "{count} छवियाँ सहेजी गईं"
+    },
+    "loading_state": {
+      "title": "सहेजी गई छवियाँ लोड हो रही हैं…"
+    },
+    "empty_state": {
+      "icon": "✦",
+      "title": "अभी तक कोई सहेजी गई छवि नहीं",
+      "subtitle": "उन्हें यहाँ देखने के लिए खोज परिणामों से छवियाँ सहेजें",
+      "cta_btn": "खोज पर जाएँ"
+    },
+    "card": {
+      "view_btn": "देखें →",
+      "remove_btn": "हटाएँ"
+    },
+    "toast": {
+      "image_removed": "छवि हटा दी गई!"
+    },
+    "footer": {
+      "copy": "© 2026",
+      "accent": "@zoker2026",
+      "links": [
+        { "label": "खोज", "path": "/dashboard" },
+        { "label": "इतिहास", "path": "/history" },
+        { "label": "मुख्य पृष्ठ", "path": "/" }
+      ]
+    }
+  },
+  "dashNav": {
+    "logo": "ImageFlow",
+    "links": [
+      { "label": "खोज", "path": "/dashboard" },
+      { "label": "इतिहास", "path": "/history" },
+      { "label": "सहेजी गई", "path": "/saved" }
+    ],
+    "popover": {
+      "profile": "प्रोफ़ाइल",
+      "profile_icon": "👤",
+      "settings": "सेटिंग्स",
+      "settings_icon": "⚙️"
+    },
+    "theme": {
+      "light": "☀ हल्का",
+      "dark": "◐ गहरा"
+    },
+    "logout": "लॉगआउट"
   }
+
 }

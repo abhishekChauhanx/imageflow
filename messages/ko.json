@@ -220,5 +220,158 @@
   },
   "loading": {
     "load": "로딩 중..."
+  },
+   "dashboard": {
+    "overlay": {
+      "loading": "로딩 중…"
+    },
+    "hero": {
+      "eyebrow": "비주얼 검색 엔진",
+      "title": "원하는 이미지를 찾아보세요",
+      "subtitle": "보이는 것을 자연어로 설명하면 ImageFlow가 140ms 이내에 웹 전반에서 이미지를 찾아드립니다.",
+      "input_placeholder": "황금 시간대의 눈 덮인 산...",
+      "search_btn": "이미지 찾기",
+      "search_btn_loading": "검색 중…"
+    },
+    "suggestion_tags": [
+      "노을진 산",
+      "애니메이션 소녀",
+      "미래 도시",
+      "귀여운 고양이",
+      "추상 미술",
+      "황혼의 오래된 등대",
+      "안개 낀 가을 숲"
+    ],
+    "loading_state": {
+      "title": "8개의 소스를 검색 중…",
+      "subtitle": "20~40초 정도 소요될 수 있습니다"
+    },
+    "empty_state": {
+      "icon": "✦",
+      "title": "위에 설명을 입력하고 '이미지 찾기'를 클릭하세요"
+    },
+    "stats_mini": [
+      { "num": "2.4B+", "label": "색인된 이미지" },
+      { "num": "140ms", "label": "평균 응답 시간" },
+      { "num": "98%", "label": "매칭 정확도" },
+      { "num": "50+", "label": "소스" }
+    ],
+    "no_results": {
+      "title": "검색 결과가 없습니다",
+      "subtitle": "다른 설명을 시도해 보세요"
+    },
+    "results": {
+      "suffix_filtered": "출처",
+      "suffix_all": "개의 이미지 발견",
+      "filter_all": "전체",
+      "card": {
+        "view_btn": "보기 →",
+        "save_btn": "저장",
+        "saved_btn": "저장됨 ✓"
+      }
+    },
+    "toast": {
+      "empty_description": "설명을 입력해 주세요",
+      "search_failed": "검색 실패",
+      "search_error": "문제가 발생했습니다. 다시 시도해 주세요.",
+      "image_saved": "이미지가 저장되었습니다!",
+      "already_saved": "이미 저장되었습니다!",
+      "save_failed": "이미지 저장 실패"
+    },
+    "footer": {
+      "copy": "© 2026",
+      "accent": "@zoker2026",
+      "links": [
+        { "label": "기록", "path": "/history" },
+        { "label": "저장됨", "path": "/saved" },
+        { "label": "홈", "path": "/" }
+      ]
+    }
+  },
+  
+  "history": {
+    "header": {
+      "eyebrow": "내 활동",
+      "title": "검색 기록",
+      "subtitle": "{count}개의 검색이 저장됨",
+      "clear_btn": "모두 지우기"
+    },
+    "loading_state": {
+      "title": "기록 불러오는 중…"
+    },
+    "empty_state": {
+      "icon": "✦",
+      "title": "아직 검색 기록이 없습니다",
+      "subtitle": "검색을 시작하면 이곳에서 기록을 확인할 수 있습니다",
+      "cta_btn": "검색으로 이동"
+    },
+    "card": {
+      "arrow": "→",
+      "meta": "{count}개 결과 · {date}"
+    },
+    "toast": {
+      "history_cleared": "기록이 삭제되었습니다!"
+    },
+    "footer": {
+      "copy": "© 2026",
+      "accent": "@zoker2026",
+      "links": [
+        { "label": "검색", "path": "/dashboard" },
+        { "label": "저장됨", "path": "/saved" },
+        { "label": "홈", "path": "/" }
+      ]
+    }
+  },
+  "saved": {
+    "header": {
+      "eyebrow": "내 컬렉션",
+      "title": "저장된 이미지",
+      "subtitle": "{count}개의 이미지 저장됨"
+    },
+    "loading_state": {
+      "title": "저장된 이미지를 불러오는 중…"
+    },
+    "empty_state": {
+      "icon": "✦",
+      "title": "아직 저장된 이미지가 없습니다",
+      "subtitle": "검색 결과에서 이미지를 저장하면 여기에 표시됩니다",
+      "cta_btn": "검색으로 이동"
+    },
+    "card": {
+      "view_btn": "보기 →",
+      "remove_btn": "삭제"
+    },
+    "toast": {
+      "image_removed": "이미지가 삭제되었습니다!"
+    },
+    "footer": {
+      "copy": "© 2026",
+      "accent": "@zoker2026",
+      "links": [
+        { "label": "검색", "path": "/dashboard" },
+        { "label": "기록", "path": "/history" },
+        { "label": "홈", "path": "/" }
+      ]
+    }
+  },
+   "dashNav": {
+    "logo": "ImageFlow",
+    "links": [
+      { "label": "검색", "path": "/dashboard" },
+      { "label": "기록", "path": "/history" },
+      { "label": "저장됨", "path": "/saved" }
+    ],
+    "popover": {
+      "profile": "프로필",
+      "profile_icon": "👤",
+      "settings": "설정",
+      "settings_icon": "⚙️"
+    },
+    "theme": {
+      "light": "☀ 라이트",
+      "dark": "◐ 다크"
+    },
+    "logout": "로그아웃"
   }
+
 }

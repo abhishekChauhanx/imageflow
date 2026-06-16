@@ -6,14 +6,22 @@ import { toggleTheme } from "@/store/themeSlice";
 import { useSession, signOut } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState, useRef, useEffect } from "react";
-import "./DashNav.css"
+import "./DashNav.css";
+import SelectLang from "../SelectLang/SelectLang";
+import { useTranslations } from "next-intl";
+
 export default function DashNav() {
   const dispatch = useAppDispatch();
   const dark = useAppSelector((s) => s.theme.mode) === "dark";
   const { data: session } = useSession();
   const router = useRouter();
+  const t = useTranslations("dashNav");
+
   const [popoverOpen, setPopoverOpen] = useState(false);
   const popoverRef = useRef<HTMLDivElement>(null);
+
+  // links is an array in JSON
+  const navLinks = t.raw("links") as { label: string; path: string }[];
 
   const handleLogout = () => {
     sessionStorage.removeItem("welcomeShown");
@@ -38,29 +46,23 @@ export default function DashNav() {
   return (
     <nav className="dash-nav">
       <span className="dash-logo" onClick={() => router.push("/")}>
-        ImageFlow
+        {t("logo")}
       </span>
 
       <ul className="dash-nav-links">
-        <li>
-          <button className="dash-nav-btn" onClick={() => router.push("/dashboard")}>
-            Search
-          </button>
-        </li>
-        <li>
-          <button className="dash-nav-btn" onClick={() => router.push("/history")}>
-            History
-          </button>
-        </li>
-        <li>
-          <button className="dash-nav-btn" onClick={() => router.push("/saved")}>
-            Saved
-          </button>
-        </li>
+        {navLinks.map((l) => (
+          <li key={l.label}>
+            <button className="dash-nav-btn" onClick={() => router.push(l.path)}>
+              {l.label}
+            </button>
+          </li>
+        ))}
       </ul>
 
       <div className="dash-nav-right">
-        {/* Avatar + Popover */}
+        <SelectLang />
+
+        {/* ── AVATAR + POPOVER ── */}
         <div className="dash-avatar-wrap" ref={popoverRef}>
           {session?.user?.image ? (
             <img
@@ -84,15 +86,15 @@ export default function DashNav() {
                 className="dash-popover-item"
                 onClick={() => { setPopoverOpen(false); router.push("/profile"); }}
               >
-                <span className="dash-popover-icon">👤</span>
-                Profile
+                <span className="dash-popover-icon">{t("popover.profile_icon")}</span>
+                {t("popover.profile")}
               </button>
               <button
                 className="dash-popover-item"
                 onClick={() => { setPopoverOpen(false); router.push("/settings"); }}
               >
-                <span className="dash-popover-icon">⚙️</span>
-                Settings
+                <span className="dash-popover-icon">{t("popover.settings_icon")}</span>
+                {t("popover.settings")}
               </button>
             </div>
           )}
@@ -103,11 +105,11 @@ export default function DashNav() {
           onClick={() => dispatch(toggleTheme())}
           aria-label="Toggle theme"
         >
-          {dark ? "☀ Light" : "◐ Dark"}
+          {dark ? t("theme.light") : t("theme.dark")}
         </button>
 
         <button className="dash-logout" onClick={handleLogout}>
-          Logout
+          {t("logout")}
         </button>
       </div>
     </nav>

@@ -220,5 +220,156 @@
   },
   "loading": {
     "load": "読み込み中..."
+  },
+  "dashboard": {
+    "overlay": {
+      "loading": "読み込み中…"
+    },
+    "hero": {
+      "eyebrow": "ビジュアル検索エンジン",
+      "title": "あらゆる画像を検索",
+      "subtitle": "見えているものを自然な言葉で説明するだけで、ImageFlow が 140ms 未満でウェブ全体から画像を見つけ出します。",
+      "input_placeholder": "ゴールデンアワーの雪山...",
+      "search_btn": "画像を探す",
+      "search_btn_loading": "検索中…"
+    },
+    "suggestion_tags": [
+      "夕焼けの山々",
+      "アニメの女の子",
+      "未来都市",
+      "かわいい猫",
+      "抽象アート",
+      "夕暮れの古い灯台",
+      "霧に包まれた秋の森"
+    ],
+    "loading_state": {
+      "title": "8つのソースを検索中…",
+      "subtitle": "20〜40秒かかる場合があります"
+    },
+    "empty_state": {
+      "icon": "✦",
+      "title": "上に説明を入力して「画像を探す」をクリックしてください"
+    },
+    "stats_mini": [
+      { "num": "2.4B+", "label": "インデックス済み画像" },
+      { "num": "140ms", "label": "平均応答時間" },
+      { "num": "98%", "label": "一致精度" },
+      { "num": "50+", "label": "ソース" }
+    ],
+    "no_results": {
+      "title": "結果が見つかりません",
+      "subtitle": "別の説明を試してください"
+    },
+    "results": {
+      "suffix_filtered": "から",
+      "suffix_all": "件の画像が見つかりました",
+      "filter_all": "すべて",
+      "card": {
+        "view_btn": "表示 →",
+        "save_btn": "保存",
+        "saved_btn": "保存済み ✓"
+      }
+    },
+    "toast": {
+      "empty_description": "説明を入力してください",
+      "search_failed": "検索に失敗しました",
+      "search_error": "問題が発生しました。もう一度お試しください。",
+      "image_saved": "画像を保存しました！",
+      "already_saved": "すでに保存されています！",
+      "save_failed": "画像の保存に失敗しました"
+    },
+    "footer": {
+      "copy": "© 2026",
+      "accent": "@zoker2026",
+      "links": [
+        { "label": "履歴", "path": "/history" },
+        { "label": "保存済み", "path": "/saved" },
+        { "label": "ホーム", "path": "/" }
+      ]
+    }
+  },
+  "history": {
+    "header": {
+      "eyebrow": "あなたのアクティビティ",
+      "title": "検索履歴",
+      "subtitle": "{count}件の検索が保存されています",
+      "clear_btn": "すべて削除"
+    },
+    "loading_state": {
+      "title": "履歴を読み込み中…"
+    },
+    "empty_state": {
+      "icon": "✦",
+      "title": "まだ検索履歴がありません",
+      "subtitle": "検索を開始すると、ここに履歴が表示されます",
+      "cta_btn": "検索へ移動"
+    },
+    "card": {
+      "arrow": "→",
+      "meta": "{count}件の結果 · {date}"
+    },
+    "toast": {
+      "history_cleared": "履歴を削除しました！"
+    },
+    "footer": {
+      "copy": "© 2026",
+      "accent": "@zoker2026",
+      "links": [
+        { "label": "検索", "path": "/dashboard" },
+        { "label": "保存済み", "path": "/saved" },
+        { "label": "ホーム", "path": "/" }
+      ]
+    }
+  },
+   "saved": {
+    "header": {
+      "eyebrow": "あなたのコレクション",
+      "title": "保存済み画像",
+      "subtitle": "{count}枚の画像が保存されています"
+    },
+    "loading_state": {
+      "title": "保存済み画像を読み込み中…"
+    },
+    "empty_state": {
+      "icon": "✦",
+      "title": "まだ保存された画像はありません",
+      "subtitle": "検索結果から画像を保存すると、ここに表示されます",
+      "cta_btn": "検索へ移動"
+    },
+    "card": {
+      "view_btn": "表示 →",
+      "remove_btn": "削除"
+    },
+    "toast": {
+      "image_removed": "画像を削除しました！"
+    },
+    "footer": {
+      "copy": "© 2026",
+      "accent": "@zoker2026",
+      "links": [
+        { "label": "検索", "path": "/dashboard" },
+        { "label": "履歴", "path": "/history" },
+        { "label": "ホーム", "path": "/" }
+      ]
+    }
+  },
+  "dashNav": {
+    "logo": "ImageFlow",
+    "links": [
+      { "label": "検索", "path": "/dashboard" },
+      { "label": "履歴", "path": "/history" },
+      { "label": "保存済み", "path": "/saved" }
+    ],
+    "popover": {
+      "profile": "プロフィール",
+      "profile_icon": "👤",
+      "settings": "設定",
+      "settings_icon": "⚙️"
+    },
+    "theme": {
+      "light": "☀ ライト",
+      "dark": "◐ ダーク"
+    },
+    "logout": "ログアウト"
   }
 }

@@ -220,5 +220,156 @@
   },
   "loading": {
     "load": "Memuat..."
+  },
+ "dashboard": {
+    "overlay": {
+      "loading": "Memuat…"
+    },
+    "hero": {
+      "eyebrow": "Mesin Pencarian Visual",
+      "title": "Temukan Gambar Apa Pun",
+      "subtitle": "Jelaskan apa yang Anda lihat dengan bahasa sederhana — dan ImageFlow akan menemukannya dari seluruh web dalam waktu kurang dari 140ms.",
+      "input_placeholder": "gunung bersalju saat golden hour...",
+      "search_btn": "Cari Gambar",
+      "search_btn_loading": "Mencari…"
+    },
+    "suggestion_tags": [
+      "gunung saat matahari terbenam",
+      "gadis anime",
+      "kota futuristik",
+      "kucing lucu",
+      "seni abstrak",
+      "mercusuar tua saat senja",
+      "hutan berkabut di musim gugur"
+    ],
+    "loading_state": {
+      "title": "Mencari di 8 sumber…",
+      "subtitle": "Ini mungkin memerlukan 20–40 detik"
+    },
+    "empty_state": {
+      "icon": "✦",
+      "title": "Ketik deskripsi di atas lalu klik Cari Gambar"
+    },
+    "stats_mini": [
+      { "num": "2.4B+", "label": "Gambar terindeks" },
+      { "num": "140ms", "label": "Rata-rata respons" },
+      { "num": "98%", "label": "Akurasi pencocokan" },
+      { "num": "50+", "label": "Sumber" }
+    ],
+    "no_results": {
+      "title": "Tidak ada hasil ditemukan",
+      "subtitle": "Coba deskripsi yang berbeda"
+    },
+    "results": {
+      "suffix_filtered": "dari",
+      "suffix_all": "gambar ditemukan",
+      "filter_all": "Semua",
+      "card": {
+        "view_btn": "Lihat →",
+        "save_btn": "Simpan",
+        "saved_btn": "Tersimpan ✓"
+      }
+    },
+    "toast": {
+      "empty_description": "Silakan masukkan deskripsi",
+      "search_failed": "Pencarian gagal",
+      "search_error": "Terjadi kesalahan. Silakan coba lagi.",
+      "image_saved": "Gambar disimpan!",
+      "already_saved": "Sudah disimpan!",
+      "save_failed": "Gagal menyimpan gambar"
+    },
+    "footer": {
+      "copy": "© 2026",
+      "accent": "@zoker2026",
+      "links": [
+        { "label": "Riwayat", "path": "/history" },
+        { "label": "Tersimpan", "path": "/saved" },
+        { "label": "Beranda", "path": "/" }
+      ]
+    }
+  },
+  "history": {
+    "header": {
+      "eyebrow": "Aktivitas Anda",
+      "title": "Riwayat Pencarian",
+      "subtitle": "{count} pencarian tersimpan",
+      "clear_btn": "Hapus Semua"
+    },
+    "loading_state": {
+      "title": "Memuat riwayat…"
+    },
+    "empty_state": {
+      "icon": "✦",
+      "title": "Belum ada pencarian",
+      "subtitle": "Mulailah mencari untuk melihat riwayat Anda di sini",
+      "cta_btn": "Ke Pencarian"
+    },
+    "card": {
+      "arrow": "→",
+      "meta": "{count} hasil · {date}"
+    },
+    "toast": {
+      "history_cleared": "Riwayat berhasil dihapus!"
+    },
+    "footer": {
+      "copy": "© 2026",
+      "accent": "@zoker2026",
+      "links": [
+        { "label": "Pencarian", "path": "/dashboard" },
+        { "label": "Tersimpan", "path": "/saved" },
+        { "label": "Beranda", "path": "/" }
+      ]
+    }
+  },
+   "saved": {
+    "header": {
+      "eyebrow": "Koleksi Anda",
+      "title": "Gambar Tersimpan",
+      "subtitle": "{count} gambar tersimpan"
+    },
+    "loading_state": {
+      "title": "Memuat gambar tersimpan…"
+    },
+    "empty_state": {
+      "icon": "✦",
+      "title": "Belum ada gambar yang disimpan",
+      "subtitle": "Simpan gambar dari hasil pencarian untuk melihatnya di sini",
+      "cta_btn": "Ke Pencarian"
+    },
+    "card": {
+      "view_btn": "Lihat →",
+      "remove_btn": "Hapus"
+    },
+    "toast": {
+      "image_removed": "Gambar dihapus!"
+    },
+    "footer": {
+      "copy": "© 2026",
+      "accent": "@zoker2026",
+      "links": [
+        { "label": "Pencarian", "path": "/dashboard" },
+        { "label": "Riwayat", "path": "/history" },
+        { "label": "Beranda", "path": "/" }
+      ]
+    }
+  }
+  , "dashNav": {
+    "logo": "ImageFlow",
+    "links": [
+      { "label": "Pencarian", "path": "/dashboard" },
+      { "label": "Riwayat", "path": "/history" },
+      { "label": "Tersimpan", "path": "/saved" }
+    ],
+    "popover": {
+      "profile": "Profil",
+      "profile_icon": "👤",
+      "settings": "Pengaturan",
+      "settings_icon": "⚙️"
+    },
+    "theme": {
+      "light": "☀ Terang",
+      "dark": "◐ Gelap"
+    },
+    "logout": "Keluar"
   }
 }

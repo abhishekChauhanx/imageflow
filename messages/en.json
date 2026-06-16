@@ -220,5 +220,177 @@
   },
   "loading": {
     "load": "Loading..."
+  },
+   "dashboard": {
+    "overlay": {
+      "loading": "Loading…"
+    },
+    "hero": {
+      "eyebrow": "Visual Search Engine",
+      "title": "Find Any Image",
+      "subtitle": "Describe what you see in plain language — and ImageFlow surfaces it from across the web in under 140ms.",
+      "input_placeholder": "a snowy mountain at golden hour...",
+      "search_btn": "Find Images",
+      "search_btn_loading": "Searching…"
+    },
+    "suggestion_tags": [
+      "sunset mountains",
+      "anime girl",
+      "futuristic city",
+      "cute cat",
+      "abstract art",
+      "old lighthouse dusk",
+      "misty forest autumn"
+    ],
+    "loading_state": {
+      "title": "Searching across 8 sources…",
+      "subtitle": "This may take 20–40 seconds"
+    },
+    "empty_state": {
+      "icon": "✦",
+      "title": "Type a description above and click Find Images"
+    },
+    "stats_mini": [
+      {
+        "num": "2.4B+",
+        "label": "Images indexed"
+      },
+      {
+        "num": "140ms",
+        "label": "Avg. response"
+      },
+      {
+        "num": "98%",
+        "label": "Match accuracy"
+      },
+      {
+        "num": "50+",
+        "label": "Sources"
+      }
+    ],
+    "no_results": {
+      "title": "No results found",
+      "subtitle": "Try a different description"
+    },
+    "results": {
+      "suffix_filtered": "from",
+      "suffix_all": "images found",
+      "filter_all": "All",
+      "card": {
+        "view_btn": "View →",
+        "save_btn": "Save",
+        "saved_btn": "Saved ✓"
+      }
+    },
+    "toast": {
+      "empty_description": "Please enter a description",
+      "search_failed": "Search failed",
+      "search_error": "Something went wrong. Please try again.",
+      "image_saved": "Image saved!",
+      "already_saved": "Already saved!",
+      "save_failed": "Failed to save image"
+    },
+    "footer": {
+      "copy": "© 2026",
+      "accent": "@zoker2026",
+      "links": [
+        {
+          "label": "History",
+          "path": "/history"
+        },
+        {
+          "label": "Saved",
+          "path": "/saved"
+        },
+        {
+          "label": "Home",
+          "path": "/"
+        }
+      ]
+    }
+  },
+  "history": {
+  "header": {
+    "eyebrow": "Your Activity",
+    "title": "Search History",
+    "subtitle": "{count} searches saved",
+    "clear_btn": "Clear All"
+  },
+  "loading_state": {
+    "title": "Loading history…"
+  },
+  "empty_state": {
+    "icon": "✦",
+    "title": "No searches yet",
+    "subtitle": "Start searching to see your history here",
+    "cta_btn": "Go to Search"
+  },
+  "card": {
+    "arrow": "→",
+    "meta": "{count} results · {date}"
+  },
+  "toast": {
+    "history_cleared": "History cleared!"
+  },
+  "footer": {
+    "copy": "© 2026",
+    "accent": "@zoker2026",
+    "links": [
+      { "label": "Search", "path": "/dashboard" },
+      { "label": "Saved", "path": "/saved" },
+      { "label": "Home", "path": "/" }
+    ]
   }
+},
+"saved": {
+  "header": {
+    "eyebrow": "Your Collection",
+    "title": "Saved Images",
+    "subtitle": "{count} images saved"
+  },
+  "loading_state": {
+    "title": "Loading saved images…"
+  },
+  "empty_state": {
+    "icon": "✦",
+    "title": "No saved images yet",
+    "subtitle": "Save images from search results to see them here",
+    "cta_btn": "Go to Search"
+  },
+  "card": {
+    "view_btn": "View →",
+    "remove_btn": "Remove"
+  },
+  "toast": {
+    "image_removed": "Image removed!"
+  },
+  "footer": {
+    "copy": "© 2026",
+    "accent": "@zoker2026",
+    "links": [
+      { "label": "Search", "path": "/dashboard" },
+      { "label": "History", "path": "/history" },
+      { "label": "Home", "path": "/" }
+    ]
+  }
+},
+"dashNav": {
+  "logo": "ImageFlow",
+  "links": [
+    { "label": "Search", "path": "/dashboard" },
+    { "label": "History", "path": "/history" },
+    { "label": "Saved", "path": "/saved" }
+  ],
+  "popover": {
+    "profile": "Profile",
+    "profile_icon": "👤",
+    "settings": "Settings",
+    "settings_icon": "⚙️"
+  },
+  "theme": {
+    "light": "☀ Light",
+    "dark": "◐ Dark"
+  },
+  "logout": "Logout"
+}
 }

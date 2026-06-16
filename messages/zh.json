@@ -222,5 +222,155 @@
   },
   "loading": {
     "load": "加载中..."
+  },
+   "dashboard": {
+    "overlay": {
+      "loading": "加载中…"
+    },
+    "hero": {
+      "eyebrow": "视觉搜索引擎",
+      "title": "查找任意图片",
+      "subtitle": "用自然语言描述你所看到的内容，ImageFlow 将在 140ms 内从整个网络中为你找到相关图片。",
+      "input_placeholder": "黄金时刻的雪山...",
+      "search_btn": "查找图片",
+      "search_btn_loading": "搜索中…"
+    },
+    "suggestion_tags": [
+      "日落群山",
+      "动漫女孩",
+      "未来城市",
+      "可爱猫咪",
+      "抽象艺术",
+      "黄昏中的古老灯塔",
+      "秋日薄雾森林"
+    ],
+    "loading_state": {
+      "title": "正在搜索 8 个来源…",
+      "subtitle": "这可能需要 20–40 秒"
+    },
+    "empty_state": {
+      "icon": "✦",
+      "title": "请在上方输入描述并点击“查找图片”"
+    },
+    "stats_mini": [
+      { "num": "2.4B+", "label": "已索引图片" },
+      { "num": "140ms", "label": "平均响应时间" },
+      { "num": "98%", "label": "匹配准确率" },
+      { "num": "50+", "label": "来源" }
+    ],
+    "no_results": {
+      "title": "未找到结果",
+      "subtitle": "请尝试其他描述"
+    },
+    "results": {
+      "suffix_filtered": "来自",
+      "suffix_all": "张图片已找到",
+      "filter_all": "全部",
+      "card": {
+        "view_btn": "查看 →",
+        "save_btn": "保存",
+        "saved_btn": "已保存 ✓"
+      }
+    },
+    "toast": {
+      "empty_description": "请输入描述",
+      "search_failed": "搜索失败",
+      "search_error": "出现问题，请重试。",
+      "image_saved": "图片已保存！",
+      "already_saved": "已保存过！",
+      "save_failed": "保存图片失败"
+    },
+    "footer": {
+      "copy": "© 2026",
+      "accent": "@zoker2026",
+      "links": [
+        { "label": "历史记录", "path": "/history" },
+        { "label": "已保存", "path": "/saved" },
+        { "label": "首页", "path": "/" }
+      ]
+    }
+  },
+   "history": {
+    "header": {
+      "eyebrow": "你的活动",
+      "title": "搜索历史",
+      "subtitle": "已保存 {count} 次搜索",
+      "clear_btn": "全部清除"
+    },
+    "loading_state": {
+      "title": "正在加载历史记录…"
+    },
+    "empty_state": {
+      "icon": "✦",
+      "title": "暂无搜索记录",
+      "subtitle": "开始搜索后，您的历史记录将显示在这里",
+      "cta_btn": "前往搜索"
+    },
+    "card": {
+      "arrow": "→",
+      "meta": "{count} 个结果 · {date}"
+    },
+    "toast": {
+      "history_cleared": "历史记录已清除！"
+    },
+    "footer": {
+      "copy": "© 2026",
+      "accent": "@zoker2026",
+      "links": [
+        { "label": "搜索", "path": "/dashboard" },
+        { "label": "已保存", "path": "/saved" },
+        { "label": "首页", "path": "/" }
+      ]
+    }
+  },
+   "saved": {
+    "header": {
+      "eyebrow": "你的收藏",
+      "title": "已保存图片",
+      "subtitle": "已保存 {count} 张图片"
+    },
+    "loading_state": {
+      "title": "正在加载已保存图片…"
+    },
+    "empty_state": {
+      "icon": "✦",
+      "title": "暂无已保存图片",
+      "subtitle": "从搜索结果中保存图片后，它们将显示在这里",
+      "cta_btn": "前往搜索"
+    },
+    "card": {
+      "view_btn": "查看 →",
+      "remove_btn": "移除"
+    },
+    "toast": {
+      "image_removed": "图片已移除！"
+    },
+    "footer": {
+      "copy": "© 2026",
+      "accent": "@zoker2026",
+      "links": [
+        { "label": "搜索", "path": "/dashboard" },
+        { "label": "历史记录", "path": "/history" },
+        { "label": "首页", "path": "/" }
+      ]
+    }
+  },"dashNav": {
+    "logo": "ImageFlow",
+    "links": [
+      { "label": "搜索", "path": "/dashboard" },
+      { "label": "历史记录", "path": "/history" },
+      { "label": "已保存", "path": "/saved" }
+    ],
+    "popover": {
+      "profile": "个人资料",
+      "profile_icon": "👤",
+      "settings": "设置",
+      "settings_icon": "⚙️"
+    },
+    "theme": {
+      "light": "☀ 浅色",
+      "dark": "◐ 深色"
+    },
+    "logout": "退出登录"
   }
 }

@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 import { getToken } from "next-auth/jwt";
 
-const locales = ["en", "hi", "zh", "id", "ko"];
+const locales = ["en", "hi", "zh", "id", "ko","ja"];
 const defaultLocale = "en";
 
 export async function proxy(request: NextRequest) {
