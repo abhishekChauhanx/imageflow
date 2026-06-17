@@ -15,16 +15,16 @@
 
 /* background */
 .if-bg {
-  fill: #111009;
+  fill:transparent;
 }
 
 /* outer decorative border */
-.if-border-outer {
+/* .if-border-outer {
   fill: none;
   stroke: #C8A96E;
   stroke-width: 0.8;
   opacity: 0.4;
-}
+} */
 
 /* inner static dim track */
 .if-border-inner {

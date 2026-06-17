@@ -124,7 +124,7 @@ export default function HistoryPage() {
                     {item.description}
                   </p>
                   <p style={{ fontSize: "0.58rem", color: "var(--muted)", letterSpacing: "0.1em", textTransform: "uppercase" }}>
-                    {t("card.meta_results", { count: item.resultsCount })} {t("card.meta_separator")} {new Date(item.createdAt).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
+                    {item.resultsCount} results · {new Date(item.createdAt).toLocaleDateString("en-GB", { day: "numeric", month: "short", year: "numeric" })}
                   </p>
                 </div>
                 <span style={{ color: "var(--accent)", fontSize: "0.75rem" }}>{t("card.arrow")}</span>
