@@ -114,11 +114,7 @@ export default function DashboardPage() {
     }
   };
 
-  const handleLogout = () => {
-    sessionStorage.removeItem("welcomeShown");
-    dispatch(showLoader());
-    signOut({ callbackUrl: "/", redirect: true });
-  };
+
 
   const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === "Enter") handleSearch();
@@ -129,10 +125,7 @@ export default function DashboardPage() {
     ? results.filter((r) => r.sourceSite === activeFilter)
     : results;
 
-  const initials =
-    session?.user?.name?.charAt(0).toUpperCase() ||
-    session?.user?.email?.charAt(0).toUpperCase() ||
-    "?";
+
 
   if (status === "loading") {
     return (
