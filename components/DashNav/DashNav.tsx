@@ -9,7 +9,7 @@ import { useState, useRef, useEffect } from "react";
 import "./DashNav.css";
 import SelectLang from "../SelectLang/SelectLang";
 import { useTranslations } from "next-intl";
-
+import { showLoader } from "@/store/loaderSlice";
 export default function DashNav() {
   const dispatch = useAppDispatch();
   const dark = useAppSelector((s) => s.theme.mode) === "dark";
@@ -23,10 +23,11 @@ export default function DashNav() {
   // links is an array in JSON
   const navLinks = t.raw("links") as { label: string; path: string }[];
 
-  const handleLogout = () => {
-    sessionStorage.removeItem("welcomeShown");
-    signOut({ callbackUrl: "/", redirect: true });
-  };
+const handleLogout = async () => {
+  sessionStorage.removeItem("welcomeShown");
+  dispatch(showLoader());
+  await signOut({ callbackUrl: "/", redirect: true });
+};
 
   const initials =
     session?.user?.name?.charAt(0).toUpperCase() ||
