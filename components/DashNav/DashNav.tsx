@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -22,7 +21,6 @@ export default function DashNav() {
   const [menuOpen, setMenuOpen] = useState(false);
   const popoverRef = useRef<HTMLDivElement>(null);
 
-  // links is an array in JSON
   const navLinks = t.raw("links") as { label: string; path: string }[];
 
   const handleLogout = async () => {
@@ -46,34 +44,73 @@ export default function DashNav() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  const goTo = (path: string) => {
+    router.push(path);
+    setMenuOpen(false);
+  };
+
   return (
     <nav className="dash-nav">
-      <span className="dash-logo" onClick={() => router.push("/")}>
-        {t("logo")}
-      </span>
+      <div className="dash-nav-top">
+        <span className="dash-logo" onClick={() => goTo("/")}>
+          {t("logo")}
+        </span>
 
-      <button
-        className={`dash-burger ${menuOpen ? "is-open" : ""}`}
-        aria-label="Toggle menu"
-        aria-expanded={menuOpen}
-        onClick={() => setMenuOpen((o) => !o)}
-      >
-        <span />
-        <span />
-        <span />
-      </button>
+        <button
+          className="dash-hamburger"
+          aria-label="Toggle menu"
+          aria-expanded={menuOpen}
+          onClick={() => setMenuOpen((m) => !m)}
+        >
+          <span />
+          <span />
+          <span />
+        </button>
 
-      <div className={`dash-nav-collapsible ${menuOpen ? "is-open" : ""}`}>
+        {/* Avatar stays visible on the top bar even on mobile */}
+        <div className="dash-avatar-wrap dash-avatar-mobile" ref={popoverRef}>
+          {session?.user?.image ? (
+            <img
+              src={session.user.image}
+              alt="avatar"
+              className="dash-avatar dash-avatar-img"
+              onClick={() => setPopoverOpen((p) => !p)}
+            />
+          ) : (
+            <div
+              className="dash-avatar dash-avatar-init"
+              onClick={() => setPopoverOpen((p) => !p)}
+            >
+              {initials}
+            </div>
+          )}
+
+          {popoverOpen && (
+            <div className="dash-popover">
+              <button
+                className="dash-popover-item"
+                onClick={() => { setPopoverOpen(false); goTo("/profile"); }}
+              >
+                <span className="dash-popover-icon">{t("popover.profile_icon")}</span>
+                {t("popover.profile")}
+              </button>
+              <button
+                className="dash-popover-item"
+                onClick={() => { setPopoverOpen(false); goTo("/settings"); }}
+              >
+                <span className="dash-popover-icon">{t("popover.settings_icon")}</span>
+                {t("popover.settings")}
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+
+      <div className={`dash-nav-collapsible ${menuOpen ? "dash-nav-collapsible-open" : ""}`}>
         <ul className="dash-nav-links">
           {navLinks.map((l) => (
             <li key={l.label}>
-              <button
-                className="dash-nav-btn"
-                onClick={() => {
-                  setMenuOpen(false);
-                  router.push(l.path);
-                }}
-              >
+              <button className="dash-nav-btn" onClick={() => goTo(l.path)}>
                 {l.label}
               </button>
             </li>
@@ -82,52 +119,6 @@ export default function DashNav() {
 
         <div className="dash-nav-right">
           <SelectLang />
-
-          {/* ── AVATAR + POPOVER ── */}
-          <div className="dash-avatar-wrap" ref={popoverRef}>
-            {session?.user?.image ? (
-              <img
-                src={session.user.image}
-                alt="avatar"
-                className="dash-avatar dash-avatar-img"
-                onClick={() => setPopoverOpen((p) => !p)}
-              />
-            ) : (
-              <div
-                className="dash-avatar dash-avatar-init"
-                onClick={() => setPopoverOpen((p) => !p)}
-              >
-                {initials}
-              </div>
-            )}
-
-            {popoverOpen && (
-              <div className="dash-popover">
-                <button
-                  className="dash-popover-item"
-                  onClick={() => {
-                    setPopoverOpen(false);
-                    setMenuOpen(false);
-                    router.push("/profile");
-                  }}
-                >
-                  <span className="dash-popover-icon">{t("popover.profile_icon")}</span>
-                  {t("popover.profile")}
-                </button>
-                <button
-                  className="dash-popover-item"
-                  onClick={() => {
-                    setPopoverOpen(false);
-                    setMenuOpen(false);
-                    router.push("/settings");
-                  }}
-                >
-                  <span className="dash-popover-icon">{t("popover.settings_icon")}</span>
-                  {t("popover.settings")}
-                </button>
-              </div>
-            )}
-          </div>
 
           <button
             className="theme-toggle"
