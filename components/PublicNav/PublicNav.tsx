@@ -17,34 +17,35 @@ export default function PublicNav({ onNav }: PublicNavProps) {
   const dispatch = useAppDispatch();
   const dark = useAppSelector((s) => s.theme.mode) === "dark";
   const t = useTranslations("nav");
+
   const [menuOpen, setMenuOpen] = useState(false);
 
   const handleClick = (href: string, e: React.MouseEvent) => {
+    setMenuOpen(false);
     if (onNav) {
       e.preventDefault();
       onNav(href);
     }
-    setMenuOpen(false); // close mobile menu on nav
   };
 
   return (
     <nav className="public-nav">
-      <div className="public-nav-bar">
-        <BlurText text="ImageFlow" className="nav-logo" as="span" delay={0} stepDelay={90} />
+      <BlurText text="ImageFlow" className="nav-logo" as="span" delay={0} stepDelay={90} />
 
-        <button
-          className="nav-hamburger"
-          aria-label="Toggle menu"
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((m) => !m)}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
-      </div>
+      {/* hamburger — only visible on small screens */}
+      <button
+        className={`nav-burger ${menuOpen ? "is-open" : ""}`}
+        aria-label="Toggle menu"
+        aria-expanded={menuOpen}
+        onClick={() => setMenuOpen((o) => !o)}
+      >
+        <span />
+        <span />
+        <span />
+      </button>
 
       <ul className={`nav-links ${menuOpen ? "nav-links-open" : ""}`}>
+        {/* in-page anchors — no loader */}
         <li>
           <TrueFocus>
             <a href="#how" onClick={() => setMenuOpen(false)}>
@@ -60,10 +61,11 @@ export default function PublicNav({ onNav }: PublicNavProps) {
           </TrueFocus>
         </li>
 
+        {/* ✅ Sign up — triggers loader */}
         <li>
           <TrueFocus>
-            
-            <a  href="/account/signup"
+            <a
+              href="/account/signup"
               className="nav-signup-btn"
               onClick={(e) => handleClick("/account/signup", e)}
             >
@@ -72,10 +74,11 @@ export default function PublicNav({ onNav }: PublicNavProps) {
           </TrueFocus>
         </li>
 
+        {/* ✅ Sign in — triggers loader */}
         <li>
           <TrueFocus>
-            
-            <a  href="/account/login"
+            <a
+              href="/account/login"
               onClick={(e) => handleClick("/account/login", e)}
             >
               <BlurText text={t("signin")} delay={530} stepDelay={45} />
@@ -83,8 +86,9 @@ export default function PublicNav({ onNav }: PublicNavProps) {
           </TrueFocus>
         </li>
 
-        <li className="nav-mobile-row">
-          <SelectLang />
+        <SelectLang />
+
+        <li>
           <button
             className="theme-toggle"
             onClick={() => dispatch(toggleTheme())}
