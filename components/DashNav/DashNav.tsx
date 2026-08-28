@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 "use client";
 
 import { useAppDispatch, useAppSelector } from "@/store/hooks";
@@ -9,7 +10,6 @@ import "./DashNav.css";
 import SelectLang from "../SelectLang/SelectLang";
 import { useTranslations } from "next-intl";
 import { showLoader } from "@/store/loaderSlice";
-
 export default function DashNav() {
   const dispatch = useAppDispatch();
   const dark = useAppSelector((s) => s.theme.mode) === "dark";
@@ -18,16 +18,16 @@ export default function DashNav() {
   const t = useTranslations("dashNav");
 
   const [popoverOpen, setPopoverOpen] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
   const popoverRef = useRef<HTMLDivElement>(null);
 
+  // links is an array in JSON
   const navLinks = t.raw("links") as { label: string; path: string }[];
 
-  const handleLogout = async () => {
-    sessionStorage.removeItem("welcomeShown");
-    dispatch(showLoader());
-    await signOut({ callbackUrl: "/", redirect: true });
-  };
+const handleLogout = async () => {
+  sessionStorage.removeItem("welcomeShown");
+  dispatch(showLoader());
+  await signOut({ callbackUrl: "/", redirect: true });
+};
 
   const initials =
     session?.user?.name?.charAt(0).toUpperCase() ||
@@ -44,31 +44,27 @@ export default function DashNav() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  const goTo = (path: string) => {
-    router.push(path);
-    setMenuOpen(false);
-  };
-
   return (
     <nav className="dash-nav">
-      <div className="dash-nav-top">
-        <span className="dash-logo" onClick={() => goTo("/")}>
-          {t("logo")}
-        </span>
+      <span className="dash-logo" onClick={() => router.push("/")}>
+        {t("logo")}
+      </span>
 
-        <button
-          className="dash-hamburger"
-          aria-label="Toggle menu"
-          aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((m) => !m)}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
+      <ul className="dash-nav-links">
+        {navLinks.map((l) => (
+          <li key={l.label}>
+            <button className="dash-nav-btn" onClick={() => router.push(l.path)}>
+              {l.label}
+            </button>
+          </li>
+        ))}
+      </ul>
 
-        {/* Avatar stays visible on the top bar even on mobile */}
-        <div className="dash-avatar-wrap dash-avatar-mobile" ref={popoverRef}>
+      <div className="dash-nav-right">
+        <SelectLang />
+
+        {/* ── AVATAR + POPOVER ── */}
+        <div className="dash-avatar-wrap" ref={popoverRef}>
           {session?.user?.image ? (
             <img
               src={session.user.image}
@@ -89,14 +85,14 @@ export default function DashNav() {
             <div className="dash-popover">
               <button
                 className="dash-popover-item"
-                onClick={() => { setPopoverOpen(false); goTo("/profile"); }}
+                onClick={() => { setPopoverOpen(false); router.push("/profile"); }}
               >
                 <span className="dash-popover-icon">{t("popover.profile_icon")}</span>
                 {t("popover.profile")}
               </button>
               <button
                 className="dash-popover-item"
-                onClick={() => { setPopoverOpen(false); goTo("/settings"); }}
+                onClick={() => { setPopoverOpen(false); router.push("/settings"); }}
               >
                 <span className="dash-popover-icon">{t("popover.settings_icon")}</span>
                 {t("popover.settings")}
@@ -104,34 +100,18 @@ export default function DashNav() {
             </div>
           )}
         </div>
-      </div>
 
-      <div className={`dash-nav-collapsible ${menuOpen ? "dash-nav-collapsible-open" : ""}`}>
-        <ul className="dash-nav-links">
-          {navLinks.map((l) => (
-            <li key={l.label}>
-              <button className="dash-nav-btn" onClick={() => goTo(l.path)}>
-                {l.label}
-              </button>
-            </li>
-          ))}
-        </ul>
+        <button
+          className="theme-toggle"
+          onClick={() => dispatch(toggleTheme())}
+          aria-label="Toggle theme"
+        >
+          {dark ? t("theme.light") : t("theme.dark")}
+        </button>
 
-        <div className="dash-nav-right">
-          <SelectLang />
-
-          <button
-            className="theme-toggle"
-            onClick={() => dispatch(toggleTheme())}
-            aria-label="Toggle theme"
-          >
-            {dark ? t("theme.light") : t("theme.dark")}
-          </button>
-
-          <button className="dash-logout" onClick={handleLogout}>
-            {t("logout")}
-          </button>
-        </div>
+        <button className="dash-logout" onClick={handleLogout}>
+          {t("logout")}
+        </button>
       </div>
     </nav>
   );
